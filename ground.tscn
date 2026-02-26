@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://dgpb73iltvv4b"]
+
+[ext_resource type="Texture2D" uid="uid://djpukaodf0lov" path="res://Checkerboard.png" id="1_yh8r4"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lv0v5"]
+size = Vector3(100, 0.1, 100)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t7tip"]
+albedo_texture = ExtResource("1_yh8r4")
+
+[sub_resource type="BoxMesh" id="BoxMesh_yh8r4"]
+
+[node name="Ground" type="StaticBody3D" unique_id=1099433293]
+
+[node name="Hitbox" type="CollisionShape3D" parent="." unique_id=989437090]
+shape = SubResource("BoxShape3D_lv0v5")
+
+[node name="Graphic" type="MeshInstance3D" parent="." unique_id=1597726515]
+transform = Transform3D(100, 0, 0, 0, 0.1, 0, 0, 0, 100, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_t7tip")
+mesh = SubResource("BoxMesh_yh8r4")
