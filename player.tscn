@@ -16,8 +16,8 @@ shape = SubResource("BoxShape3D_sh265")
 transform = Transform3D(1, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("CylinderMesh_4flbx")
 
-[node name="Camera" type="Camera3D" parent="." unique_id=865906383]
-transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 0, 8.021597, 4.9114904)
+[node name="Camera" type="Camera3D" parent="." unique_id=422245830]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 0, 8, 5)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=944657100]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.950289, 0)
