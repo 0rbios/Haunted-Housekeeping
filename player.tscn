@@ -22,7 +22,7 @@ transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=944657100]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.950289, 0)
 
-[node name="Speedometer Timer" type="Timer" parent="." unique_id=199821601]
-wait_time = 0.1
+[node name="Dash Timer" type="Timer" parent="." unique_id=356395536]
+wait_time = 0.2
 
-[connection signal="timeout" from="Speedometer Timer" to="." method="_update_speedometer"]
+[connection signal="timeout" from="Dash Timer" to="." method="_dash_complete"]
