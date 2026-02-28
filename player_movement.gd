@@ -1,6 +1,6 @@
-extends CharacterBody3D
+extends RigidBody3D
 
-var speed = 10
+var speed = 110
 var horizontal = 0
 var long = 0
 var toBeNormalized
@@ -8,6 +8,8 @@ var toBeNormalized
 var direction
 
 var dashing = false
+
+var velocity = Vector3(0, 0, 0)
 
 func _physics_process(_delta):
 	if dashing == false:
@@ -44,20 +46,20 @@ func _physics_process(_delta):
 				long = 0
 		
 		if Input.is_action_just_pressed("ui_accept") and velocity != Vector3(0, 0, 0):
-			speed = 30
+			speed = 330
 			dashing = true
 			$"Dash Timer".start()
 	
 	var tween = get_tree().create_tween()
-	tween.tween_property($Camera, "global_position", Vector3(self.global_position.x, $Camera.global_position.y, self.global_position.z + 5), 0.5)
-	
-	
+	tween.tween_property($Camera, "global_position", Vector3(self.global_position.x, $Camera.global_position.y, self.global_position.z + 5), 0.3)
+
 	toBeNormalized = Vector2(horizontal, long).normalized()
 	velocity = Vector3(toBeNormalized.x * speed, 0, toBeNormalized.y * speed)
-	move_and_slide()
+	apply_force(velocity)
 
 func _dash_complete():
-	speed = 10
+	speed = 110
+
 	if horizontal == -1 and !Input.is_action_pressed("ui_left"): 
 		if Input.is_action_pressed("ui_right"):
 			horizontal = 1
@@ -93,6 +95,5 @@ func _dash_complete():
 			long = -1
 		if Input.is_action_pressed("ui_down"):
 			long = 1
-
-	dashing = false
 	
+	dashing = false

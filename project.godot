@@ -13,7 +13,10 @@ config_version=5
 config/name="Test"
 run/main_scene="uid://12wfu2blar8s"
 config/features=PackedStringArray("4.6", "Forward Plus")
-config/icon="res://icon.svg"
+
+[global_group]
+
+player=""
 
 [physics]
 
