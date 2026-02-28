@@ -11,21 +11,29 @@ func _physics_process(_delta):
 		self.freeze = false
 		$Hitbox.disabled = false
 	
-	if Input.is_action_just_pressed("ui_home"):
+	if Input.is_action_just_pressed("Interact"):
 		if canPickup:
 			isCarried = true
 		elif isCarried:
 			isCarried = false
+			canPickup = true
 			self.position = Vector3($"../Player".position.x, $"../Player".position.y, $"../Player".position.z)
+	
+	if $"../Player".dashing and isCarried:
+		isCarried = false
+		canPickup = true
+		self.position = Vector3($"../Player".position.x, $"../Player".position.y, $"../Player".position.z)
 	
 	if isCarried:
 		canPickup = false
 		self.position = Vector3($"../Player".position.x, $"../Player".position.y + 1, $"../Player".position.z)
 
 func _collision_enter(body: Node3D):
-	if body.is_in_group("player"):
+	if body.is_in_group("player") and global.playerHovering == false:
+		global.playerHovering = true
 		canPickup = true
 
 func _collision_exit(body: Node3D):
+	global.playerHovering = false
 	if body.is_in_group("player"):
 		canPickup = false

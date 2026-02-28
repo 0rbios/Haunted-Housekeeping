@@ -26,9 +26,13 @@ environment = SubResource("Environment_txpwr")
 
 [node name="Player" parent="." unique_id=607617953 instance=ExtResource("2_rdi1l")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+linear_damp = 13.0
 
 [node name="Camera" type="Camera3D" parent="Player" unique_id=21355786]
 transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 0, 8, 5)
 
 [node name="Object" parent="." unique_id=194550230 instance=ExtResource("3_rdi1l")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -11)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46212244, 2.731835, -11)
+
+[node name="Object2" parent="." unique_id=203089754 instance=ExtResource("3_rdi1l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.570656, 4.685247, -6.6874313)

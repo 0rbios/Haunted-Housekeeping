@@ -13,39 +13,39 @@ var velocity = Vector3(0, 0, 0)
 
 func _physics_process(_delta):
 	if dashing == false:
-		if Input.is_action_just_pressed("ui_left"):
+		if Input.is_action_just_pressed("Left"):
 			horizontal = -1
-		elif horizontal == -1 and Input.is_action_just_released("ui_left"): 
-			if Input.is_action_pressed("ui_right"):
+		elif horizontal == -1 and Input.is_action_just_released("Left"): 
+			if Input.is_action_pressed("Right"):
 				horizontal = 1
 			else:
 				horizontal = 0
 		
-		if Input.is_action_just_pressed("ui_right"):
+		if Input.is_action_just_pressed("Right"):
 			horizontal = 1
-		elif horizontal == 1 and Input.is_action_just_released("ui_right"): 
-			if Input.is_action_pressed("ui_left"):
+		elif horizontal == 1 and Input.is_action_just_released("Right"): 
+			if Input.is_action_pressed("Left"):
 				horizontal = -1
 			else:
 				horizontal = 0
 		
-		if Input.is_action_just_pressed("ui_down"):
+		if Input.is_action_just_pressed("Down"):
 			long = 1
-		elif long == 1 and Input.is_action_just_released("ui_down"): 
-			if Input.is_action_pressed("ui_down"):
+		elif long == 1 and Input.is_action_just_released("Down"): 
+			if Input.is_action_pressed("Up"):
 				long = -1
 			else:
 				long = 0
 		
-		if Input.is_action_just_pressed("ui_up"):
+		if Input.is_action_just_pressed("Up"):
 			long = -1
-		elif long == -1 and Input.is_action_just_released("ui_up"): 
-			if Input.is_action_pressed("ui_up"):
+		elif long == -1 and Input.is_action_just_released("Up"): 
+			if Input.is_action_pressed("Down"):
 				long = 1
 			else:
 				long = 0
 		
-		if Input.is_action_just_pressed("ui_accept") and velocity != Vector3(0, 0, 0):
+		if Input.is_action_just_pressed("Dash") and velocity != Vector3(0, 0, 0):
 			speed = 330
 			dashing = true
 			$"Dash Timer".start()
@@ -60,40 +60,40 @@ func _physics_process(_delta):
 func _dash_complete():
 	speed = 110
 
-	if horizontal == -1 and !Input.is_action_pressed("ui_left"): 
-		if Input.is_action_pressed("ui_right"):
+	if horizontal == -1 and !Input.is_action_pressed("Left"): 
+		if Input.is_action_pressed("Right"):
 			horizontal = 1
 		else:
 			horizontal = 0
 		
-	if horizontal == 1 and !Input.is_action_pressed("ui_right"): 
-		if Input.is_action_pressed("ui_left"):
+	if horizontal == 1 and !Input.is_action_pressed("Right"): 
+		if Input.is_action_pressed("Left"):
 			horizontal = -1
 		else:
 			horizontal = 0
 		
-	if long == 1 and !Input.is_action_pressed("ui_down"): 
-		if Input.is_action_pressed("ui_down"):
+	if long == 1 and !Input.is_action_pressed("Down"): 
+		if Input.is_action_pressed("Up"):
 			long = -1
 		else:
 			long = 0
 		
-	if long == -1 and !Input.is_action_pressed("ui_up"): 
-		if Input.is_action_pressed("ui_up"):
+	if long == -1 and !Input.is_action_pressed("Up"): 
+		if Input.is_action_pressed("Down"):
 			long = 1
 		else:
 			long = 0
 		
 	if horizontal == 0:
-		if Input.is_action_pressed("ui_left"):
+		if Input.is_action_pressed("Left"):
 			horizontal = -1
-		if Input.is_action_pressed("ui_right"):
+		if Input.is_action_pressed("Right"):
 			horizontal = 1
 			
 	if long == 0:
-		if Input.is_action_pressed("ui_up"):
+		if Input.is_action_pressed("Up"):
 			long = -1
-		if Input.is_action_pressed("ui_down"):
+		if Input.is_action_pressed("Down"):
 			long = 1
 	
 	dashing = false
