@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dgpb73iltvv4b"]
 
-[ext_resource type="Texture2D" uid="uid://djpukaodf0lov" path="res://Checkerboard.png" id="1_yh8r4"]
+[ext_resource type="Texture2D" uid="uid://djpukaodf0lov" path="res://Temp/Checkerboard.png" id="1_yh8r4"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lv0v5"]
 size = Vector3(100, 0.1, 100)

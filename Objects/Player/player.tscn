@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bydgq1bvyaibu"]
 
-[ext_resource type="Script" uid="uid://b2gtp2adu3xus" path="res://player_movement.gd" id="1_4flbx"]
+[ext_resource type="Script" uid="uid://b2gtp2adu3xus" path="res://Objects/Player/Scripts/player_movement.gd" id="1_4flbx"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_4flbx"]
 height = 1.0

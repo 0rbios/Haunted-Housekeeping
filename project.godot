@@ -10,9 +10,16 @@ config_version=5
 
 [application]
 
-config/name="Test"
+config/name="Project: Haunted Housekeeper"
+config/version="Prototype 1"
 run/main_scene="uid://12wfu2blar8s"
 config/features=PackedStringArray("4.6", "Forward Plus")
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/size/resizable=false
 
 [global_group]
 

@@ -1,6 +1,7 @@
 extends RigidBody3D
 
 var canPickup = false
+var isCarried = false
 
 func _physics_process(_delta):
 	if linear_velocity == Vector3(0, 0, 0):
@@ -10,8 +11,16 @@ func _physics_process(_delta):
 		self.freeze = false
 		$Hitbox.disabled = false
 	
-	if Input.is_action_just_pressed("ui_home") and canPickup:
-		print("Uppies")
+	if Input.is_action_just_pressed("ui_home"):
+		if canPickup:
+			isCarried = true
+		elif isCarried:
+			isCarried = false
+			self.position = Vector3($"../Player".position.x, $"../Player".position.y, $"../Player".position.z)
+	
+	if isCarried:
+		canPickup = false
+		self.position = Vector3($"../Player".position.x, $"../Player".position.y + 1, $"../Player".position.z)
 
 func _collision_enter(body: Node3D):
 	if body.is_in_group("player"):
