@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://bydgq1bvyaibu"]
+
+[ext_resource type="Script" uid="uid://b2gtp2adu3xus" path="res://Objects/Player/Scripts/player_movement.gd" id="1_4flbx"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_4flbx"]
+height = 1.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_4flbx"]
+
+[node name="Player" type="RigidBody3D" unique_id=895042765 groups=["player"]]
+lock_rotation = true
+linear_damp_mode = 1
+linear_damp = 12.921
+script = ExtResource("1_4flbx")
+
+[node name="Hitbox" type="CollisionShape3D" parent="." unique_id=998538502]
+shape = SubResource("CylinderShape3D_4flbx")
+
+[node name="Graphic" type="MeshInstance3D" parent="." unique_id=226402085]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_4flbx")
+
+[node name="Dash Timer" type="Timer" parent="." unique_id=29579098]
+wait_time = 0.2
+
+[connection signal="timeout" from="Dash Timer" to="." method="_dash_complete"]

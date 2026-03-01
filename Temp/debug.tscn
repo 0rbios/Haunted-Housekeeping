@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://12wfu2blar8s"]
+
+[ext_resource type="PackedScene" uid="uid://dgpb73iltvv4b" path="res://Objects/Ground/ground.tscn" id="1_lvjdj"]
+[ext_resource type="PackedScene" uid="uid://bydgq1bvyaibu" path="res://Objects/Player/player.tscn" id="2_rdi1l"]
+[ext_resource type="PackedScene" uid="uid://dmjwhext3k31a" path="res://Objects/Pickups/pickup.tscn" id="3_rdi1l"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lvjdj"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_rdi1l"]
+sky_material = SubResource("ProceduralSkyMaterial_lvjdj")
+
+[sub_resource type="Environment" id="Environment_txpwr"]
+background_mode = 2
+sky = SubResource("Sky_rdi1l")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Node3D" type="Node3D" unique_id=1390304786]
+
+[node name="Environment" type="WorldEnvironment" parent="." unique_id=900787361]
+environment = SubResource("Environment_txpwr")
+
+[node name="Ground" parent="." unique_id=1099433293 instance=ExtResource("1_lvjdj")]
+
+[node name="Player" parent="." unique_id=607617953 instance=ExtResource("2_rdi1l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+linear_damp = 13.0
+
+[node name="Camera" type="Camera3D" parent="Player" unique_id=21355786]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 0, 8, 5)
+
+[node name="Object" parent="." unique_id=194550230 instance=ExtResource("3_rdi1l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46212244, 2.731835, -11)
+pickupType = "mop"
+
+[node name="Object2" parent="." unique_id=203089754 instance=ExtResource("3_rdi1l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.570656, 4.685247, -6.6874313)

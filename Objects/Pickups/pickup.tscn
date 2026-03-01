@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://dmjwhext3k31a"]
+
+[ext_resource type="Script" uid="uid://cnyxwfvwanqpe" path="res://Objects/Pickups/Script/pickup.gd" id="1_l2ofb"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rfk7t"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_l2ofb"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7kwjt"]
+
+[node name="Object" type="RigidBody3D" unique_id=203089754]
+linear_velocity = Vector3(0, 0.1, 0)
+script = ExtResource("1_l2ofb")
+
+[node name="Hitbox" type="CollisionShape3D" parent="." unique_id=917453094]
+shape = SubResource("BoxShape3D_rfk7t")
+
+[node name="Graphic" type="MeshInstance3D" parent="." unique_id=1247216010]
+mesh = SubResource("BoxMesh_l2ofb")
+
+[node name="Pickup Box" type="Area3D" parent="." unique_id=286331205]
+
+[node name="Hitbox" type="CollisionShape3D" parent="Pickup Box" unique_id=1258640100]
+shape = SubResource("BoxShape3D_7kwjt")
+
+[connection signal="body_entered" from="Pickup Box" to="." method="_collision_enter"]
+[connection signal="body_exited" from="Pickup Box" to="." method="_collision_exit"]
