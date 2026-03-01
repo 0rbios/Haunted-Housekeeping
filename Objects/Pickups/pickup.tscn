@@ -7,7 +7,6 @@
 [sub_resource type="BoxMesh" id="BoxMesh_l2ofb"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7kwjt"]
-size = Vector3(0.1, 1, 0.1)
 
 [node name="Object" type="RigidBody3D" unique_id=203089754]
 linear_velocity = Vector3(0, 0.1, 0)

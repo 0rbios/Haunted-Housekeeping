@@ -1,5 +1,7 @@
 extends RigidBody3D
 
+@export var pickupType: String
+
 var canPickup = false
 var isCarried = false
 
@@ -27,6 +29,10 @@ func _physics_process(_delta):
 	if isCarried:
 		canPickup = false
 		self.position = Vector3($"../Player".position.x, $"../Player".position.y + 1, $"../Player".position.z)
+	
+	if Input.is_action_pressed("Use") and isCarried:
+		match pickupType:
+			"mop": print("Item Used")
 
 func _collision_enter(body: Node3D):
 	if body.is_in_group("player") and global.playerHovering == false:
