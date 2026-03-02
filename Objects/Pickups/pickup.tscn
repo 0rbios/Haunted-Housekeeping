@@ -8,7 +8,7 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7kwjt"]
 
-[node name="Object" type="RigidBody3D" unique_id=203089754]
+[node name="Object" type="RigidBody3D" unique_id=203089754 groups=["object"]]
 linear_velocity = Vector3(0, 0.1, 0)
 script = ExtResource("1_l2ofb")
 

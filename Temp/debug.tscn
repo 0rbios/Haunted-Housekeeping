@@ -40,4 +40,4 @@ pickupType = "mop"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.570656, 4.685247, -6.6874313)
 
 [node name="Ghost" parent="." unique_id=774080266 instance=ExtResource("4_whauu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 4.575736)

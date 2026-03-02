@@ -28,6 +28,8 @@ window/size/resizable=false
 [global_group]
 
 player=""
+object=""
+ghost=""
 
 [input]
 
