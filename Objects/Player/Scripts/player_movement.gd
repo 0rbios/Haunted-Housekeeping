@@ -51,7 +51,7 @@ func _physics_process(_delta):
 			$"Dash Timer".start()
 	
 	var tween = get_tree().create_tween()
-	tween.tween_property($Camera, "global_position", Vector3(self.global_position.x, $Camera.global_position.y, self.global_position.z + 5), 0.3)
+	tween.tween_property($Camera, "global_position", Vector3(self.global_position.x, self.global_position.y + 40, self.global_position.z + 40), 0.3)
 
 	toBeNormalized = Vector2(horizontal, long).normalized()
 	velocity = Vector3(toBeNormalized.x * speed, 0, toBeNormalized.y * speed)
