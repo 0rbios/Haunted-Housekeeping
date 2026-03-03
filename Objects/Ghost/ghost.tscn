@@ -27,6 +27,6 @@ one_shot = true
 
 [node name="CurrentAction" type="Label3D" parent="." unique_id=604558182]
 transform = Transform3D(1, 0, 0, 0, 0.4214949, 0.9068308, 0, -0.9068308, 0.4214949, 0, 1.4872648, 0)
-font_size = 240
+font_size = 48
 
 [connection signal="timeout" from="Rest Timer" to="." method="_rest_over"]

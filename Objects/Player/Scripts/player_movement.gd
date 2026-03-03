@@ -11,6 +11,8 @@ var dashing = false
 
 var velocity = Vector3(0, 0, 0)
 
+var carryingNode
+
 func _physics_process(_delta):
 	if dashing == false:
 		if Input.is_action_just_pressed("Left"):
@@ -48,10 +50,21 @@ func _physics_process(_delta):
 		if Input.is_action_just_pressed("Dash") and velocity != Vector3(0, 0, 0):
 			speed = 330
 			dashing = true
+			if carryingNode != null:
+				carryingNode.position = self.position
+				carryingNode.carried = false
+				carryingNode = null
 			$"Dash Timer".start()
 	
+	if carryingNode != null:
+		carryingNode.position = Vector3(self.position.x, self.position.y + 1, self.position.z)
+	
 	var tween = get_tree().create_tween()
-	tween.tween_property($Camera, "global_position", Vector3(self.global_position.x, self.global_position.y + 40, self.global_position.z + 40), 0.3)
+	# Normal Cam
+	tween.tween_property($Camera, "global_position", Vector3(self.global_position.x, $Camera.global_position.y, self.global_position.z + 5), 0.3)
+	
+	# Overview Cam
+	#tween.tween_property($Camera, "global_position", Vector3(self.global_position.x, self.global_position.y + 50, self.global_position.z + 50), 0.3)
 
 	toBeNormalized = Vector2(horizontal, long).normalized()
 	velocity = Vector3(toBeNormalized.x * speed, 0, toBeNormalized.y * speed)

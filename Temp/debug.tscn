@@ -39,6 +39,12 @@ pickupType = "mop"
 [node name="Object2" parent="." unique_id=203089754 instance=ExtResource("3_rdi1l")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.4844, 4.911544, 16.83707)
 
+[node name="Object3" parent="." unique_id=89118270 instance=ExtResource("3_rdi1l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.542767, 8.778299, -18.452644)
+
+[node name="Object4" parent="." unique_id=557077033 instance=ExtResource("3_rdi1l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.133941, 5.1547594, 14.553395)
+
 [node name="Ghost" parent="." unique_id=774080266 instance=ExtResource("4_whauu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 4.575736)
 
@@ -50,9 +56,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.233206, 0.6, 0)
 
 [node name="Ghost4" parent="." unique_id=302550963 instance=ExtResource("4_whauu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, -7.0476723)
-
-[node name="Object3" parent="." unique_id=89118270 instance=ExtResource("3_rdi1l")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.542767, 8.778299, -18.452644)
-
-[node name="Object4" parent="." unique_id=557077033 instance=ExtResource("3_rdi1l")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.133941, 5.1547594, 14.553395)
