@@ -1,16 +1,24 @@
 extends RigidBody3D
 
-var randPos = Vector3(0, 0, 0)
+# Variables --------------------
+
+# Movement
 var speed = 5
 
+# Modules
 var rng = RandomNumberGenerator.new()
 
+# Holding
 var objects
 var pickupObject
-
 var carryingNode = null
 
+# Functions --------------------
+
 func _ready():
+	_choose_action()
+
+func _rest_over():
 	_choose_action()
 
 func _physics_process(_delta):
@@ -19,39 +27,27 @@ func _physics_process(_delta):
 
 func _choose_action():
 	match rng.randi_range(0, 2):
-		0: 
-			$CurrentAction.text = "Going to " + str(randPos)
-			_move_to(_generate_random_pos(-50, 50, -50, 50), "cont")
-		1:
-			$CurrentAction.text = "Waiting"
-			$"Rest Timer".start()
-		2:
-			_pickup()
+		0: _move_to(_generate_random_pos(-50, 50, -50, 50), "cont")
+		1: $"Rest Timer".start()
+		2: _pickup()
 
 func _generate_random_pos(minX, maxX, minZ, maxZ):
-	randPos = Vector3(rng.randf_range(minX, maxX), 0.6, rng.randf_range(minZ,maxZ))
-	return randPos
+	return Vector3(rng.randf_range(minX, maxX), 0.6, rng.randf_range(minZ,maxZ))
 
 func _move_to(pos, next):
 	var tween = get_tree().create_tween()
 	
 	match next:
-		"cont": tween.connect("finished", _move_finished)
+		"cont": tween.connect("finished", _choose_action)
 		"grab": tween.connect("finished", _move_finished_grab)
 	
 	var travelTime = sqrt(((pos.x - self.position.x) ** 2) + ((pos.z - self.position.z) ** 2)) / speed
 	tween.tween_property(self, "position", pos, travelTime)
 
-func _move_finished():
-	_choose_action()
-	
 func _move_finished_grab():
-	if pickupObject.carried == false:
+	if !pickupObject.carried:
 		pickupObject.carried = true
 		carryingNode = pickupObject
-	_choose_action()
-
-func _rest_over():
 	_choose_action()
 
 func _pickup():
@@ -67,16 +63,13 @@ func _pickup():
 		objects = get_tree().get_nodes_in_group("object")
 		
 		for i in range(objects.size()):
-			if objects[i].carried == false:
-				objectDistanceList.push_back({"distance": sqrt(((objects[i].position.x - self.position.x) ** 2)+ ((objects[i].position.z - self.position.z)** 2)), "node": objects[i]}) 
-				distanceList.push_back(sqrt(((objects[i].position.x - self.position.x) ** 2)+ ((objects[i].position.z - self.position.z)** 2))) 
-			
+			if !objects[i].carried:
+				var objectDistance = sqrt(((objects[i].position.x - self.position.x) ** 2)+ ((objects[i].position.z - self.position.z)** 2))
+				objectDistanceList.push_back({"node": objects[i], "distance": objectDistance}) 
+				distanceList.push_back(objectDistance) 
+		
 		if distanceList.size() > 0:
 			pickupObject = objectDistanceList[distanceList.find(distanceList.min())].node
-			
-			$CurrentAction.text = "Picking up " + str(pickupObject)
-		
 			_move_to(Vector3(pickupObject.position.x, 0.6, pickupObject.position.z), "grab")
-		
 		else:
 			_choose_action()

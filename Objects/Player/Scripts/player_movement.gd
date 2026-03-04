@@ -1,20 +1,31 @@
 extends RigidBody3D
 
+# Variables --------------------
+
+# Movement
 var speed = 110
 var horizontal = 0
 var long = 0
-var toBeNormalized
-
-var direction
-
 var dashing = false
-
 var velocity = Vector3(0, 0, 0)
 
+# Carrying
 var carryingNode
 
+# Camera Switch
+var camMode = "normal"
+
+# Functions --------------------
+
 func _physics_process(_delta):
+	if Input.is_action_just_pressed("SwitchCam"):
+		if camMode == "normal":
+			camMode = "overview"
+		elif camMode == "overview":
+			camMode = "normal"
+	
 	if dashing == false:
+		
 		if Input.is_action_just_pressed("Left"):
 			horizontal = -1
 		elif horizontal == -1 and Input.is_action_just_released("Left"): 
@@ -56,23 +67,23 @@ func _physics_process(_delta):
 				carryingNode = null
 			$"Dash Timer".start()
 	
+	var tween = get_tree().create_tween()
+	
+	match camMode:
+		"normal": tween.tween_property($Camera, "global_position", Vector3(self.global_position.x, self.global_position.y + 10, self.global_position.z + 5), 0.3)
+		"overview": tween.tween_property($Camera, "global_position", Vector3(self.global_position.x, self.global_position.y + 50, self.global_position.z + 50), 0.3)
+	
+	var toBeNormalized = Vector2(horizontal, long).normalized()
+	velocity = Vector3(toBeNormalized.x * speed, 0, toBeNormalized.y * speed)
+	apply_force(velocity)
+	
 	if carryingNode != null:
 		carryingNode.position = Vector3(self.position.x, self.position.y + 1, self.position.z)
 	
-	var tween = get_tree().create_tween()
-	# Normal Cam
-	tween.tween_property($Camera, "global_position", Vector3(self.global_position.x, $Camera.global_position.y, self.global_position.z + 5), 0.3)
-	
-	# Overview Cam
-	#tween.tween_property($Camera, "global_position", Vector3(self.global_position.x, self.global_position.y + 50, self.global_position.z + 50), 0.3)
-
-	toBeNormalized = Vector2(horizontal, long).normalized()
-	velocity = Vector3(toBeNormalized.x * speed, 0, toBeNormalized.y * speed)
-	apply_force(velocity)
 
 func _dash_complete():
 	speed = 110
-
+	
 	if horizontal == -1 and !Input.is_action_pressed("Left"): 
 		if Input.is_action_pressed("Right"):
 			horizontal = 1
