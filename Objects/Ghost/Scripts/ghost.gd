@@ -23,13 +23,15 @@ func _rest_over():
 
 func _physics_process(_delta):
 	if carryingNode != null:
+		carryingNode.rotation = self.rotation
 		carryingNode.position = Vector3(self.position.x, self.position.y + 1, self.position.z)
 
 func _choose_action():
-	match rng.randi_range(0, 2):
+	match rng.randi_range(0, 3):
 		0: _move_to(_generate_random_pos(-50, 50, -50, 50), "cont")
 		1: $"Rest Timer".start()
 		2: _pickup()
+		3: _pickup()
 
 func _generate_random_pos(minX, maxX, minZ, maxZ):
 	return Vector3(rng.randf_range(minX, maxX), 0.6, rng.randf_range(minZ,maxZ))
@@ -51,19 +53,20 @@ func _move_finished_grab():
 	_choose_action()
 
 func _pickup():
-	var objectDistanceList = []
-	var distanceList = []
-	
 	if carryingNode != null:
 		carryingNode.position = self.position
+		carryingNode.carried = false
 		carryingNode = null
 		_choose_action()
 	else:
 		# IF NO ITEMS ARE EVER CREATED OR DESTROYED THEN THIS SHOULD BE MOVED TO _READY
 		objects = get_tree().get_nodes_in_group("object")
-		
+	
+		var objectDistanceList = []
+		var distanceList = []
+	
 		for i in range(objects.size()):
-			if !objects[i].carried:
+			if objects[i].carried == false:
 				var objectDistance = sqrt(((objects[i].position.x - self.position.x) ** 2)+ ((objects[i].position.z - self.position.z)** 2))
 				objectDistanceList.push_back({"node": objects[i], "distance": objectDistance}) 
 				distanceList.push_back(objectDistance) 
@@ -72,4 +75,12 @@ func _pickup():
 			pickupObject = objectDistanceList[distanceList.find(distanceList.min())].node
 			_move_to(Vector3(pickupObject.position.x, 0.6, pickupObject.position.z), "grab")
 		else:
+			print("Nothing to find")
 			_choose_action()
+
+func _collision_detected(body):
+	if body.is_in_group("player") and body.dashing:
+		if carryingNode != null:
+			carryingNode.carried = false
+			carryingNode.position = self.position
+			carryingNode = null
