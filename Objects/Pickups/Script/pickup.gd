@@ -1,45 +1,35 @@
 extends RigidBody3D
 
+# Variables --------------------
+
+# Unique ID
 @export var pickupType: String
 
-var canPickup = false
-var isCarried = false
+# Carrying
+var possibleCarrier = null
+var carried = false
+
+# Functions --------------------
 
 func _physics_process(_delta):
-	if linear_velocity == Vector3(0, 0, 0):
-		self.freeze = true
-		$Hitbox.disabled = true
-	else:
-		self.freeze = false
-		$Hitbox.disabled = false
-	
-	if Input.is_action_just_pressed("Interact"):
-		if canPickup:
-			isCarried = true
-		elif isCarried:
-			isCarried = false
-			canPickup = true
-			self.position = Vector3($"../Player".position.x, $"../Player".position.y, $"../Player".position.z)
-	
-	if $"../Player".dashing and isCarried:
-		isCarried = false
-		canPickup = true
-		self.position = Vector3($"../Player".position.x, $"../Player".position.y, $"../Player".position.z)
-	
-	if isCarried:
-		canPickup = false
-		self.position = Vector3($"../Player".position.x, $"../Player".position.y + 1, $"../Player".position.z)
-	
-	if Input.is_action_pressed("Use") and isCarried:
-		match pickupType:
-			"mop": print("Item Used")
+	self.freeze = linear_velocity == Vector3(0, 0, 0)
+	$Hitbox.disabled = linear_velocity == Vector3(0, 0, 0)
+
+	if Input.is_action_just_pressed("Interact") and possibleCarrier != null:
+		if carried == false:
+			possibleCarrier.carryingNode = self
+			carried = true
+		else:
+			self.position = possibleCarrier.position
+			possibleCarrier.carryingNode = null
+			carried = false
 
 func _collision_enter(body: Node3D):
-	if body.is_in_group("player") and global.playerHovering == false:
+	if body.is_in_group("player") and !global.playerHovering:
 		global.playerHovering = true
-		canPickup = true
+		possibleCarrier = body
 
 func _collision_exit(body: Node3D):
-	global.playerHovering = false
 	if body.is_in_group("player"):
-		canPickup = false
+		global.playerHovering = false
+		possibleCarrier = null

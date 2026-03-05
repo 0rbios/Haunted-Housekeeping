@@ -1,4 +1,4 @@
 extends Node
 
-var playerCarry = false
+# Global Variables
 var playerHovering = false
