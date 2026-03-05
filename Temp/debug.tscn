@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bydgq1bvyaibu" path="res://Objects/Player/player.tscn" id="2_rdi1l"]
 [ext_resource type="PackedScene" uid="uid://dmjwhext3k31a" path="res://Objects/Pickups/pickup.tscn" id="3_rdi1l"]
 [ext_resource type="PackedScene" uid="uid://bu1xuria60y5g" path="res://Objects/Ghost/ghost.tscn" id="4_whauu"]
+[ext_resource type="PackedScene" uid="uid://dpcfbku5h8bpa" path="res://Objects/Dirt/dirt.tscn" id="5_ttnt2"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lvjdj"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -56,3 +57,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.233206, 0.6, 0)
 
 [node name="Ghost4" parent="." unique_id=302550963 instance=ExtResource("4_whauu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, -7.0476723)
+
+[node name="Dirt" parent="." unique_id=21112982 instance=ExtResource("5_ttnt2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5394399, 8.847149)
+dirtType = "ground"
+
+[node name="Dirt2" parent="." unique_id=2092558158 instance=ExtResource("5_ttnt2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.322424, 0.5394399, -5.349043)
+dirtType = "ground"
+
+[node name="Dirt3" parent="." unique_id=73371600 instance=ExtResource("5_ttnt2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.422171, 0.5394399, 20.772963)
+dirtType = "ground"
+
+[node name="Dirt4" parent="." unique_id=197198947 instance=ExtResource("5_ttnt2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.073324, 0.5394399, 4.949362)
+dirtType = "ground"

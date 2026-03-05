@@ -11,6 +11,8 @@ var velocity = Vector3(0, 0, 0)
 
 # Carrying
 var carryingNode
+var holdX
+var holdY
 
 # Camera Switch
 var camMode = "normal"
@@ -23,6 +25,14 @@ func _physics_process(_delta):
 			camMode = "overview"
 		elif camMode == "overview":
 			camMode = "normal"
+	
+	if carryingNode != null:
+		if Input.is_action_pressed("Use"):
+			holdX = 1
+			holdY = 0
+		else:
+			holdX = 0
+			holdY = 1
 	
 	if dashing == false:
 		
@@ -78,7 +88,7 @@ func _physics_process(_delta):
 	apply_force(velocity)
 	
 	if carryingNode != null:
-		carryingNode.position = Vector3(self.position.x, self.position.y + 1, self.position.z)
+		carryingNode.position = Vector3(self.position.x + holdX, self.position.y + holdY, self.position.z)
 	
 
 func _dash_complete():
