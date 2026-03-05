@@ -27,11 +27,10 @@ func _physics_process(_delta):
 		carryingNode.position = Vector3(self.position.x, self.position.y + 1, self.position.z)
 
 func _choose_action():
-	match rng.randi_range(0, 3):
+	match rng.randi_range(0, 2):
 		0: _move_to(_generate_random_pos(-50, 50, -50, 50), "cont")
 		1: $"Rest Timer".start()
 		2: _pickup()
-		3: _pickup()
 
 func _generate_random_pos(minX, maxX, minZ, maxZ):
 	return Vector3(rng.randf_range(minX, maxX), 0.6, rng.randf_range(minZ,maxZ))
