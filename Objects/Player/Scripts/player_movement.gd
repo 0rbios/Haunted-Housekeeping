@@ -11,28 +11,18 @@ var velocity = Vector3(0, 0, 0)
 
 # Carrying
 var carryingNode
-var holdX
-var holdY
-
-# Camera Switch
-var camMode = "normal"
 
 # Functions --------------------
 
 func _physics_process(_delta):
-	if Input.is_action_just_pressed("SwitchCam"):
-		if camMode == "normal":
-			camMode = "overview"
-		elif camMode == "overview":
-			camMode = "normal"
 	
 	if carryingNode != null:
 		if Input.is_action_pressed("Use"):
-			holdX = 1
-			holdY = 0
+			carryingNode.position.z = -1
+			carryingNode.position.y = 0
 		else:
-			holdX = 0
-			holdY = 1
+			carryingNode.position.z = 0
+			carryingNode.position.y = 1
 	
 	if dashing == false:
 		
@@ -70,28 +60,23 @@ func _physics_process(_delta):
 		
 		if Input.is_action_just_pressed("Dash") and velocity != Vector3(0, 0, 0):
 			speed = 330
+			self.set_collision_layer_value(4, true)
 			dashing = true
 			if carryingNode != null:
-				carryingNode.position = self.position
-				carryingNode.carried = false
+				carryingNode.drop()
 				carryingNode = null
 			$"Dash Timer".start()
-	
-	var tween = get_tree().create_tween()
-	
-	match camMode:
-		"normal": tween.tween_property($Camera, "global_position", Vector3(self.global_position.x, self.global_position.y + 10, self.global_position.z + 5), 0.3)
-		"overview": tween.tween_property($Camera, "global_position", Vector3(self.global_position.x, self.global_position.y + 50, self.global_position.z + 50), 0.3)
 	
 	var toBeNormalized = Vector2(horizontal, long).normalized()
 	velocity = Vector3(toBeNormalized.x * speed, 0, toBeNormalized.y * speed)
 	apply_force(velocity)
 	
-	if carryingNode != null:
-		carryingNode.position = Vector3(self.position.x + holdX, self.position.y + holdY, self.position.z)
+	if velocity != Vector3(0, 0, 0):
+		look_at(self.global_position + velocity)
 	
-
 func _dash_complete():
+	self.set_collision_layer_value(4, false)
+	
 	speed = 110
 	
 	if horizontal == -1 and !Input.is_action_pressed("Left"): 

@@ -46,15 +46,14 @@ func _move_to(pos, next):
 	tween.tween_property(self, "position", pos, travelTime)
 
 func _move_finished_grab():
-	if !pickupObject.carried:
-		pickupObject.carried = true
+	if pickupObject.carriedBy == null:
+		pickupObject.carriedBy = self
 		carryingNode = pickupObject
 	_choose_action()
 
 func _pickup():
 	if carryingNode != null:
-		carryingNode.position = self.position
-		carryingNode.carried = false
+		carryingNode.drop()
 		carryingNode = null
 		_choose_action()
 	else:
@@ -65,7 +64,7 @@ func _pickup():
 		var distanceList = []
 	
 		for i in range(objects.size()):
-			if objects[i].carried == false:
+			if objects[i].carriedBy == null:
 				var objectDistance = sqrt(((objects[i].position.x - self.position.x) ** 2)+ ((objects[i].position.z - self.position.z)** 2))
 				objectDistanceList.push_back({"node": objects[i], "distance": objectDistance}) 
 				distanceList.push_back(objectDistance) 
@@ -74,12 +73,10 @@ func _pickup():
 			pickupObject = objectDistanceList[distanceList.find(distanceList.min())].node
 			_move_to(Vector3(pickupObject.position.x, 0.6, pickupObject.position.z), "grab")
 		else:
-			print("Nothing to find")
 			_choose_action()
 
 func _collision_detected(body):
 	if body.is_in_group("player") and body.dashing:
 		if carryingNode != null:
-			carryingNode.carried = false
-			carryingNode.position = self.position
+			carryingNode.drop()
 			carryingNode = null

@@ -7,22 +7,22 @@ extends RigidBody3D
 
 # Carrying
 var possibleCarrier = null
-var carried = false
+var carriedBy = null
 
 # Functions --------------------
 
 func _physics_process(_delta):
-	self.freeze = linear_velocity == Vector3(0, 0, 0)
-
-	if Input.is_action_just_pressed("Interact") and possibleCarrier != null:
-		if carried == false:
-			possibleCarrier.carryingNode = self
-			carried = true
-			print(pickupType)
-		else:
-			self.position = possibleCarrier.position
-			possibleCarrier.carryingNode = null
-			carried = false
+	self.freeze = linear_velocity.y == 0
+	
+	if Input.is_action_just_pressed("Interact"):
+		if carriedBy == null and possibleCarrier != null:
+			self.position = Vector3(0,0,0)
+			self.rotation = possibleCarrier.rotation
+			carriedBy = possibleCarrier
+			carriedBy.carryingNode = self
+			reparent(carriedBy, false)
+		elif carriedBy != null:
+			drop()
 	
 func _collision_enter(body: Node3D):
 	if body.is_in_group("player") and !global.playerHovering:
@@ -33,3 +33,9 @@ func _collision_exit(body: Node3D):
 	if body.is_in_group("player"):
 		global.playerHovering = false
 		possibleCarrier = null
+
+func drop():
+	self.position = carriedBy.position
+	carriedBy.carryingNode = null
+	carriedBy = null
+	reparent(get_tree().root, false)

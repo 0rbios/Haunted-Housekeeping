@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dmjwhext3k31a" path="res://Objects/Pickups/pickup.tscn" id="3_rdi1l"]
 [ext_resource type="PackedScene" uid="uid://bu1xuria60y5g" path="res://Objects/Ghost/ghost.tscn" id="4_whauu"]
 [ext_resource type="PackedScene" uid="uid://dpcfbku5h8bpa" path="res://Objects/Dirt/dirt.tscn" id="5_ttnt2"]
+[ext_resource type="Script" uid="uid://cqj1e0f7is52v" path="res://Temp/camera.gd" id="6_jby4n"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lvjdj"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -29,9 +30,6 @@ environment = SubResource("Environment_txpwr")
 [node name="Player" parent="." unique_id=607617953 instance=ExtResource("2_rdi1l")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 linear_damp = 13.0
-
-[node name="Camera" type="Camera3D" parent="Player" unique_id=21355786]
-transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 0, 8, 5)
 
 [node name="Object" parent="." unique_id=194550230 instance=ExtResource("3_rdi1l")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46212244, 2.731835, -11)
@@ -73,3 +71,7 @@ dirtType = "ground"
 [node name="Dirt4" parent="." unique_id=197198947 instance=ExtResource("5_ttnt2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.073324, 0.5394399, 4.949362)
 dirtType = "ground"
+
+[node name="Camera" type="Camera3D" parent="." unique_id=21355786]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 0, 8.5, 5)
+script = ExtResource("6_jby4n")
