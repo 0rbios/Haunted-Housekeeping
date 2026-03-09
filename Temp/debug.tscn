@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bu1xuria60y5g" path="res://Objects/Ghost/ghost.tscn" id="4_whauu"]
 [ext_resource type="PackedScene" uid="uid://dpcfbku5h8bpa" path="res://Objects/Dirt/dirt.tscn" id="5_ttnt2"]
 [ext_resource type="Script" uid="uid://cqj1e0f7is52v" path="res://Temp/camera.gd" id="6_jby4n"]
+[ext_resource type="PackedScene" uid="uid://7weh2gc0dfrp" path="res://Maps/HUD/hud.tscn" id="7_aieuy"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lvjdj"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -15,10 +16,13 @@ ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 sky_material = SubResource("ProceduralSkyMaterial_lvjdj")
 
 [sub_resource type="Environment" id="Environment_txpwr"]
-background_mode = 2
+background_mode = 1
+background_color = Color(0.25275356, 0.25275356, 0.25275356, 1)
 sky = SubResource("Sky_rdi1l")
-tonemap_mode = 2
-glow_enabled = true
+ambient_light_source = 3
+tonemap_exposure = 2.0
+adjustment_enabled = true
+adjustment_brightness = 1.3
 
 [node name="Node3D" type="Node3D" unique_id=1390304786]
 
@@ -37,12 +41,15 @@ pickupType = "mop"
 
 [node name="Object2" parent="." unique_id=203089754 instance=ExtResource("3_rdi1l")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.4844, 4.911544, 16.83707)
+pickupType = "mop"
 
 [node name="Object3" parent="." unique_id=89118270 instance=ExtResource("3_rdi1l")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.542767, 8.778299, -18.452644)
+pickupType = "mop"
 
 [node name="Object4" parent="." unique_id=557077033 instance=ExtResource("3_rdi1l")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.133941, 5.1547594, 14.553395)
+pickupType = "mop"
 
 [node name="Ghost" parent="." unique_id=774080266 instance=ExtResource("4_whauu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 4.575736)
@@ -75,3 +82,5 @@ cleanedBy = ["mop"]
 [node name="Camera" type="Camera3D" parent="." unique_id=21355786]
 transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 0, 8.5, 5)
 script = ExtResource("6_jby4n")
+
+[node name="HUD" parent="." unique_id=1026730231 instance=ExtResource("7_aieuy")]

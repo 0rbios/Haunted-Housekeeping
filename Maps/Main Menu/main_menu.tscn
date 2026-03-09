@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://dttw5tp4dbpv7"]
+
+[ext_resource type="Script" uid="uid://ckry76hjalu7c" path="res://Maps/Main Menu/Scripts/main_menu.gd" id="1_e32qf"]
+
+[node name="Main Menu" type="Control" unique_id=502632630]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_e32qf")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1312700507]
+
+[node name="Title" type="Label" parent="CanvasLayer" unique_id=657473031]
+offset_left = 399.0
+offset_top = 238.0
+offset_right = 899.0
+offset_bottom = 304.0
+theme_override_font_sizes/font_size = 43
+text = "Haunted Housekeeping"
+
+[node name="Version Label" type="Label" parent="CanvasLayer" unique_id=1011881111]
+offset_left = 1131.0
+offset_top = 691.0
+offset_right = 1273.0
+offset_bottom = 714.0
+text = "Prototype 1 (P.0.0)"
+
+[node name="Compiled Date" type="Label" parent="CanvasLayer" unique_id=294270488]
+offset_left = 7.0
+offset_top = 689.0
+offset_right = 76.0
+offset_bottom = 712.0
+text = "Mar-9-26-18-05"
+
+[node name="Play Button" type="Button" parent="CanvasLayer" unique_id=963611272]
+offset_left = 449.0
+offset_top = 367.0
+offset_right = 594.0
+offset_bottom = 433.0
+theme_override_font_sizes/font_size = 38
+text = "Play"
+
+[node name="Exit Button" type="Button" parent="CanvasLayer" unique_id=186765882]
+offset_left = 690.0
+offset_top = 366.0
+offset_right = 835.0
+offset_bottom = 432.0
+theme_override_font_sizes/font_size = 38
+text = "Exit"
+
+[connection signal="pressed" from="CanvasLayer/Play Button" to="." method="_play_pressed"]
+[connection signal="pressed" from="CanvasLayer/Exit Button" to="." method="_exit_button"]

@@ -16,11 +16,11 @@ func _physics_process(_delta):
 	
 	if Input.is_action_just_pressed("Interact"):
 		if carriedBy == null and possibleCarrier != null:
-			self.position = Vector3(0,0,0)
-			self.rotation = possibleCarrier.rotation
 			carriedBy = possibleCarrier
+			self.position = Vector3(0,0,0)
 			carriedBy.carryingNode = self
 			reparent(carriedBy, false)
+			self.rotation = Vector3(0, 0, 0)
 		elif carriedBy != null:
 			drop()
 	
