@@ -13,8 +13,10 @@ albedo_color = Color(0, 1, 0, 1)
 [node name="Ghost" type="RigidBody3D" unique_id=774080266 groups=["ghost"]]
 disable_mode = 2
 collision_layer = 2
-collision_mask = 3
+collision_mask = 10
 gravity_scale = 0.0
+freeze = true
+freeze_mode = 1
 contact_monitor = true
 max_contacts_reported = 1
 script = ExtResource("1_8iwm6")

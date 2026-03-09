@@ -10,9 +10,16 @@ albedo_color = Color(1, 0, 0, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_4flbx"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yw17q"]
+albedo_color = Color(0, 0.6350238, 0.4108521, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_156m4"]
+size = Vector3(0.36, 0.745, 0.31)
+
 [node name="Player" type="RigidBody3D" unique_id=895042765 groups=["player"]]
+axis_lock_angular_x = true
+axis_lock_angular_z = true
 gravity_scale = 0.0
-lock_rotation = true
 linear_damp_mode = 1
 linear_damp = 12.921
 script = ExtResource("1_4flbx")
@@ -24,6 +31,11 @@ shape = SubResource("CylinderShape3D_4flbx")
 transform = Transform3D(1, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_156m4")
 mesh = SubResource("CylinderMesh_4flbx")
+
+[node name="Direction" type="MeshInstance3D" parent="." unique_id=173400274]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0, 0, 0, 1, 0.011389613, 0.19689432, -0.62773234)
+material_override = SubResource("StandardMaterial3D_yw17q")
+mesh = SubResource("BoxMesh_156m4")
 
 [node name="Dash Timer" type="Timer" parent="." unique_id=29579098]
 wait_time = 0.2

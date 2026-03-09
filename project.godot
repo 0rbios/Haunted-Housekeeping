@@ -15,10 +15,6 @@ config/version="Prototype 1"
 run/main_scene="uid://12wfu2blar8s"
 config/features=PackedStringArray("4.6", "Forward Plus")
 
-[autoload]
-
-global="*uid://b0jlbmaxwcwrn"
-
 [display]
 
 window/size/viewport_width=1280
