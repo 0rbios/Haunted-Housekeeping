@@ -5,7 +5,7 @@ extends Camera3D
 # Camera Switch
 var camMode = "normal"
 
-@onready var following = $"../Player"
+@onready var following
 
 # Functions --------------------
 

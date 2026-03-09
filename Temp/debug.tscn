@@ -1,11 +1,10 @@
 [gd_scene format=3 uid="uid://12wfu2blar8s"]
 
 [ext_resource type="PackedScene" uid="uid://dgpb73iltvv4b" path="res://Objects/Ground/ground.tscn" id="1_lvjdj"]
-[ext_resource type="PackedScene" uid="uid://bydgq1bvyaibu" path="res://Objects/Player/player.tscn" id="2_rdi1l"]
 [ext_resource type="PackedScene" uid="uid://dmjwhext3k31a" path="res://Objects/Pickups/pickup.tscn" id="3_rdi1l"]
 [ext_resource type="PackedScene" uid="uid://bu1xuria60y5g" path="res://Objects/Ghost/ghost.tscn" id="4_whauu"]
 [ext_resource type="PackedScene" uid="uid://dpcfbku5h8bpa" path="res://Objects/Dirt/dirt.tscn" id="5_ttnt2"]
-[ext_resource type="Script" uid="uid://cqj1e0f7is52v" path="res://Temp/camera.gd" id="6_jby4n"]
+[ext_resource type="Script" uid="uid://dcvauu71i073y" path="res://Multiplayer/multiplayer_handler.gd" id="6_jby4n"]
 [ext_resource type="PackedScene" uid="uid://7weh2gc0dfrp" path="res://Maps/HUD/hud.tscn" id="7_aieuy"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lvjdj"]
@@ -30,10 +29,6 @@ adjustment_brightness = 1.3
 environment = SubResource("Environment_txpwr")
 
 [node name="Ground" parent="." unique_id=1099433293 instance=ExtResource("1_lvjdj")]
-
-[node name="Player" parent="." unique_id=607617953 instance=ExtResource("2_rdi1l")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-linear_damp = 13.0
 
 [node name="Object" parent="." unique_id=194550230 instance=ExtResource("3_rdi1l")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46212244, 2.731835, -11)
@@ -79,8 +74,7 @@ cleanedBy = ["mop"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.073324, 0.5394399, 4.949362)
 cleanedBy = ["mop"]
 
-[node name="Camera" type="Camera3D" parent="." unique_id=21355786]
-transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 0, 8.5, 5)
-script = ExtResource("6_jby4n")
-
 [node name="HUD" parent="." unique_id=1026730231 instance=ExtResource("7_aieuy")]
+
+[node name="Multiplayer Handler" type="Node" parent="." unique_id=1774263206]
+script = ExtResource("6_jby4n")

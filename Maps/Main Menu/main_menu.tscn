@@ -35,13 +35,21 @@ offset_right = 76.0
 offset_bottom = 712.0
 text = "Mar-9-26-18-05"
 
-[node name="Play Button" type="Button" parent="CanvasLayer" unique_id=963611272]
+[node name="Host Button" type="Button" parent="CanvasLayer" unique_id=963611272]
 offset_left = 449.0
 offset_top = 367.0
 offset_right = 594.0
 offset_bottom = 433.0
 theme_override_font_sizes/font_size = 38
-text = "Play"
+text = "Host"
+
+[node name="Join Button" type="Button" parent="CanvasLayer" unique_id=1581908819]
+offset_left = 570.0
+offset_top = 465.0
+offset_right = 715.0
+offset_bottom = 531.0
+theme_override_font_sizes/font_size = 38
+text = "Join"
 
 [node name="Exit Button" type="Button" parent="CanvasLayer" unique_id=186765882]
 offset_left = 690.0
@@ -51,5 +59,6 @@ offset_bottom = 432.0
 theme_override_font_sizes/font_size = 38
 text = "Exit"
 
-[connection signal="pressed" from="CanvasLayer/Play Button" to="." method="_play_pressed"]
+[connection signal="pressed" from="CanvasLayer/Host Button" to="." method="_play_pressed"]
+[connection signal="pressed" from="CanvasLayer/Join Button" to="." method="_join_pressed"]
 [connection signal="pressed" from="CanvasLayer/Exit Button" to="." method="_exit_button"]
