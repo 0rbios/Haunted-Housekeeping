@@ -58,19 +58,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, -7.0476723)
 
 [node name="Dirt" parent="." unique_id=21112982 instance=ExtResource("5_ttnt2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5394399, 8.847149)
-dirtType = "ground"
+cleanedBy = ["mop"]
 
 [node name="Dirt2" parent="." unique_id=2092558158 instance=ExtResource("5_ttnt2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.322424, 0.5394399, -5.349043)
-dirtType = "ground"
+cleanedBy = ["mop"]
 
 [node name="Dirt3" parent="." unique_id=73371600 instance=ExtResource("5_ttnt2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.422171, 0.5394399, 20.772963)
-dirtType = "ground"
+cleanedBy = ["mop"]
 
 [node name="Dirt4" parent="." unique_id=197198947 instance=ExtResource("5_ttnt2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.073324, 0.5394399, 4.949362)
-dirtType = "ground"
+cleanedBy = ["mop"]
 
 [node name="Camera" type="Camera3D" parent="." unique_id=21355786]
 transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 0, 8.5, 5)

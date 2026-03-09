@@ -25,13 +25,13 @@ func _physics_process(_delta):
 			drop()
 	
 func _collision_enter(body: Node3D):
-	if body.is_in_group("player") and !global.playerHovering:
-		global.playerHovering = true
+	if body.is_in_group("player") and !body.playerHovering:
+		body.playerHovering = true
 		possibleCarrier = body
 
 func _collision_exit(body: Node3D):
 	if body.is_in_group("player"):
-		global.playerHovering = false
+		body.playerHovering = false
 		possibleCarrier = null
 
 func drop():
