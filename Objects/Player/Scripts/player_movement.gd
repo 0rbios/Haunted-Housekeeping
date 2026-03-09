@@ -21,7 +21,7 @@ func _physics_process(_delta):
 		if Input.is_action_pressed("Use"):
 			carryingNode.position.z = -1
 			carryingNode.position.y = 0
-			activeSpeed = baseSpeed / 2
+			activeSpeed = baseSpeed / 2.0
 		else:
 			carryingNode.position.z = 0
 			carryingNode.position.y = 1
