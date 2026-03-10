@@ -13,9 +13,3 @@ func spawn_player(id: int):
 	var player = networkPlayer.instantiate()
 	player.name = str(id)
 	get_node(spawn_path).call_deferred("add_child", player)
-	
-	var camera = networkCamera.instantiate()
-	camera.name = str(id) + "Camera"
-	camera.following = player
-	camera.position.y = 10
-	get_node(spawn_path).call_deferred("add_child", camera)

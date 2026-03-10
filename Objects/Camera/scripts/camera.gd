@@ -5,12 +5,12 @@ extends Camera3D
 # Camera Switch
 var camMode = "normal"
 
-@onready var following
+@onready var following = $".."
 
 # Functions --------------------
 
-func _enter_tree():
-	set_multiplayer_authority(following.name.to_int())
+func _ready():
+	self.current = is_multiplayer_authority()
 
 func _physics_process(_delta):
 	if Input.is_action_just_pressed("SwitchCam"):
@@ -18,6 +18,8 @@ func _physics_process(_delta):
 			camMode = "overview"
 		elif camMode == "overview":
 			camMode = "normal"
+	
+	self.rotation.y = following.rotation.y * -1
 	
 	var tween = get_tree().create_tween()
 	
