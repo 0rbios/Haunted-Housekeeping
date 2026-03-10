@@ -9,6 +9,9 @@ var camMode = "normal"
 
 # Functions --------------------
 
+func _enter_tree():
+	set_multiplayer_authority(following.name.to_int())
+
 func _physics_process(_delta):
 	if Input.is_action_just_pressed("SwitchCam"):
 		if camMode == "normal":

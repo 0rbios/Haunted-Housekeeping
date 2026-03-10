@@ -5,7 +5,10 @@
 [ext_resource type="PackedScene" uid="uid://bu1xuria60y5g" path="res://Objects/Ghost/ghost.tscn" id="4_whauu"]
 [ext_resource type="PackedScene" uid="uid://dpcfbku5h8bpa" path="res://Objects/Dirt/dirt.tscn" id="5_ttnt2"]
 [ext_resource type="Script" uid="uid://dcvauu71i073y" path="res://Multiplayer/multiplayer_handler.gd" id="6_jby4n"]
+[ext_resource type="Script" uid="uid://df43orxqup27e" path="res://Multiplayer/multiplayer_spawner.gd" id="7_4gr4l"]
 [ext_resource type="PackedScene" uid="uid://7weh2gc0dfrp" path="res://Maps/HUD/hud.tscn" id="7_aieuy"]
+[ext_resource type="PackedScene" uid="uid://bydgq1bvyaibu" path="res://Objects/Player/player.tscn" id="8_rp06g"]
+[ext_resource type="PackedScene" uid="uid://cl876uiox5x3f" path="res://Objects/Camera/camera.tscn" id="9_rp06g"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lvjdj"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -78,3 +81,10 @@ cleanedBy = ["mop"]
 
 [node name="Multiplayer Handler" type="Node" parent="." unique_id=1774263206]
 script = ExtResource("6_jby4n")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=259843879]
+_spawnable_scenes = PackedStringArray("uid://bydgq1bvyaibu")
+spawn_path = NodePath("..")
+script = ExtResource("7_4gr4l")
+networkPlayer = ExtResource("8_rp06g")
+networkCamera = ExtResource("9_rp06g")

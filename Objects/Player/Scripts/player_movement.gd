@@ -16,7 +16,12 @@ var playerHovering = false
 
 # Functions --------------------
 
+func _enter_tree():
+	set_multiplayer_authority(name.to_int())
+
 func _physics_process(_delta):
+	if !is_multiplayer_authority(): return
+	
 	if carryingNode != null:
 		if Input.is_action_pressed("Use"):
 			carryingNode.position.z = -1
