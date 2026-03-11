@@ -11,7 +11,7 @@ var dashing = false
 var velocity = Vector3(0, 0, 0)
 
 # Carrying
-@export var carryingNode: Node
+var carryingNode
 var playerHovering = false
 
 # Functions --------------------

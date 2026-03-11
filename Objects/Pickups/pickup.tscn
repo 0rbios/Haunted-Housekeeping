@@ -12,30 +12,39 @@ albedo_color = Color(0, 0, 1, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_7kwjt"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_7kwjt"]
-properties/0/path = NodePath(".:carriedBy")
+properties/0/path = NodePath("..:position")
 properties/0/spawn = true
 properties/0/replication_mode = 1
+properties/1/path = NodePath("..:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:position")
+properties/2/spawn = true
+properties/2/replication_mode = 1
 
-[node name="Object" type="RigidBody3D" unique_id=203089754 groups=["object"]]
+[node name="Pivot Point" type="Marker3D" unique_id=740589869]
+
+[node name="Object" type="RigidBody3D" parent="." unique_id=203089754 groups=["object"]]
 collision_layer = 4
 collision_mask = 3
 linear_velocity = Vector3(0, 0.1, 0)
 script = ExtResource("1_l2ofb")
 
-[node name="Hitbox" type="CollisionShape3D" parent="." unique_id=917453094]
+[node name="Hitbox" type="CollisionShape3D" parent="Object" unique_id=917453094]
 shape = SubResource("BoxShape3D_rfk7t")
 
-[node name="Graphic" type="MeshInstance3D" parent="." unique_id=1247216010]
+[node name="Graphic" type="MeshInstance3D" parent="Object" unique_id=1247216010]
 material_overlay = SubResource("StandardMaterial3D_7kwjt")
 mesh = SubResource("BoxMesh_l2ofb")
 
-[node name="Pickup Box" type="Area3D" parent="." unique_id=286331205]
+[node name="Pickup Box" type="Area3D" parent="Object" unique_id=286331205]
 
-[node name="Hitbox" type="CollisionShape3D" parent="Pickup Box" unique_id=1258640100]
+[node name="Hitbox" type="CollisionShape3D" parent="Object/Pickup Box" unique_id=1258640100]
 shape = SubResource("BoxShape3D_7kwjt")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=283157735]
+root_path = NodePath("../Object")
 replication_config = SubResource("SceneReplicationConfig_7kwjt")
 
-[connection signal="body_entered" from="Pickup Box" to="." method="_collision_enter"]
-[connection signal="body_exited" from="Pickup Box" to="." method="_collision_exit"]
+[connection signal="body_entered" from="Object/Pickup Box" to="Object" method="_collision_enter"]
+[connection signal="body_exited" from="Object/Pickup Box" to="Object" method="_collision_exit"]
