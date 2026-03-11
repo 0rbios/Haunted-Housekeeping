@@ -12,25 +12,31 @@ var rng = RandomNumberGenerator.new()
 var objects
 var pickupObject
 var carryingNode = null
+var playerHovering = false
+
+# Multiplayer
+var canChoose = false
 
 # Functions --------------------
-
-func _ready():
-	_choose_action()
 
 func _rest_over():
 	_choose_action()
 
 func _physics_process(_delta):
+	if multiplayer.is_server() and canChoose == false:
+		canChoose = true
+		_choose_action()
+	
 	if carryingNode != null:
 		carryingNode.rotation = self.rotation
 		carryingNode.position = Vector3(self.position.x, self.position.y + 1, self.position.z)
 
 func _choose_action():
-	match rng.randi_range(0, 2):
-		0: _move_to(_generate_random_pos(-50, 50, -50, 50), "cont")
-		1: $"Rest Timer".start()
-		2: _pickup()
+	if canChoose == true:
+		match rng.randi_range(0, 1):
+			0: _move_to(_generate_random_pos(-50, 50, -50, 50), "cont")
+			1: $"Rest Timer".start()
+			2: _pickup()
 
 func _generate_random_pos(minX, maxX, minZ, maxZ):
 	return Vector3(rng.randf_range(minX, maxX), 0.6, rng.randf_range(minZ,maxZ))
@@ -47,8 +53,7 @@ func _move_to(pos, next):
 
 func _move_finished_grab():
 	if pickupObject.carriedBy == null:
-		pickupObject.carriedBy = self
-		carryingNode = pickupObject
+		pickupObject.pickup()
 	_choose_action()
 
 func _pickup():

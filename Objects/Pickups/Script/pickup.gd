@@ -7,7 +7,7 @@ extends RigidBody3D
 
 # Carrying
 var possibleCarrier = null
-var carriedBy = null
+@export var carriedBy = null
 
 # Functions --------------------
 
@@ -16,23 +16,26 @@ func _physics_process(_delta):
 	
 	if Input.is_action_just_pressed("Interact"):
 		if carriedBy == null and possibleCarrier != null:
-			carriedBy = possibleCarrier
-			self.position = Vector3(0,0,0)
-			carriedBy.carryingNode = self
-			reparent(carriedBy, false)
-			self.rotation = Vector3(0, 0, 0)
+			pickup()
 		elif carriedBy != null:
 			drop()
 	
 func _collision_enter(body: Node3D):
-	if body.is_in_group("player") and !body.playerHovering:
-		body.playerHovering = true
-		possibleCarrier = body
+	if (body.is_in_group("player") or body.is_in_group("ghost")) and !body.playerHovering:
+			body.playerHovering = true
+			possibleCarrier = body
 
 func _collision_exit(body: Node3D):
-	if body.is_in_group("player"):
+	if body.is_in_group("player") or body.is_in_group("ghost"):
 		body.playerHovering = false
 		possibleCarrier = null
+
+func pickup():
+	carriedBy = possibleCarrier
+	self.position = Vector3(0,0,0)
+	carriedBy.carryingNode = self
+	reparent(carriedBy, false)
+	self.rotation = Vector3(0, 0, 0)
 
 func drop():
 	self.position = carriedBy.position
