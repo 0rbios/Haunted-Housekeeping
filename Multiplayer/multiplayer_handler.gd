@@ -12,9 +12,11 @@ func _ready():
 func create_server():
 	var peer = ENetMultiplayerPeer.new()
 	peer.create_server(PORT)
+	multiplayer.allow_object_decoding = true
 	multiplayer.multiplayer_peer = peer
 
 func create_client():
 	var peer = ENetMultiplayerPeer.new()
 	peer.create_client(IPADDRESS, PORT)
+	multiplayer.allow_object_decoding = true
 	multiplayer.multiplayer_peer = peer

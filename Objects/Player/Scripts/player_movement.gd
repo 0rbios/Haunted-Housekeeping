@@ -91,8 +91,14 @@ func _dash_complete():
 	activeSpeed = baseSpeed
 	dashing = false
 
+@rpc("any_peer", "call_local")
+func change_auth(node, id):
+	get_node(node).set_multiplayer_authority(id)
+
 func pickup():
 	carryingNode = hoverOver
+	change_auth.rpc(carryingNode.get_parent().get_path(), name.to_int())
+	carryingNode.freeze = true
 	carryingNode.carriedBy = self
 
 func drop():

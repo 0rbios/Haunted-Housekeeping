@@ -26,6 +26,11 @@ tonemap_exposure = 2.0
 adjustment_enabled = true
 adjustment_brightness = 1.3
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_rp06g"]
+properties/0/path = NodePath(".:objectPlayerList")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
 [node name="Node3D" type="Node3D" unique_id=1390304786]
 
 [node name="Environment" type="WorldEnvironment" parent="." unique_id=900787361]
@@ -33,33 +38,29 @@ environment = SubResource("Environment_txpwr")
 
 [node name="Ground" parent="." unique_id=1099433293 instance=ExtResource("1_lvjdj")]
 
-[node name="First Mop" parent="." unique_id=194550230 instance=ExtResource("3_rdi1l")]
+[node name="Object" parent="." unique_id=194550230 instance=ExtResource("3_rdi1l")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46212244, 2.731835, -11)
 
-[node name="Object" parent="First Mop" index="0" unique_id=203089754]
+[node name="Object" parent="Object" index="0" unique_id=203089754]
 pickupType = "mop"
-nodeName = "mop1"
 
-[node name="Second Mop" parent="." unique_id=48108023 instance=ExtResource("3_rdi1l")]
+[node name="Object2" parent="." unique_id=48108023 instance=ExtResource("3_rdi1l")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.4844, 4.911544, 16.83707)
 
-[node name="Object" parent="Second Mop" index="0" unique_id=203089754]
+[node name="Object" parent="Object2" index="0" unique_id=203089754]
 pickupType = "mop"
-nodeName = "mop2"
 
-[node name="Third Mop" parent="." unique_id=89118270 instance=ExtResource("3_rdi1l")]
+[node name="Object3" parent="." unique_id=89118270 instance=ExtResource("3_rdi1l")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.542767, 8.778299, -18.452644)
 
-[node name="Object" parent="Third Mop" index="0" unique_id=203089754]
+[node name="Object" parent="Object3" index="0" unique_id=203089754]
 pickupType = "mop"
-nodeName = "mop3"
 
-[node name="Fourth Mop" parent="." unique_id=557077033 instance=ExtResource("3_rdi1l")]
+[node name="Object4" parent="." unique_id=557077033 instance=ExtResource("3_rdi1l")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.133941, 5.1547594, 14.553395)
 
-[node name="Object" parent="Fourth Mop" index="0" unique_id=203089754]
+[node name="Object" parent="Object4" index="0" unique_id=203089754]
 pickupType = "mop"
-nodeName = "mop4"
 
 [node name="Ghost" parent="." unique_id=774080266 instance=ExtResource("4_whauu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 4.575736)
@@ -101,7 +102,10 @@ script = ExtResource("7_4gr4l")
 networkPlayer = ExtResource("8_rp06g")
 networkCamera = ExtResource("9_rp06g")
 
-[editable path="First Mop"]
-[editable path="Second Mop"]
-[editable path="Third Mop"]
-[editable path="Fourth Mop"]
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="MultiplayerSpawner" unique_id=1134411755]
+replication_config = SubResource("SceneReplicationConfig_rp06g")
+
+[editable path="Object"]
+[editable path="Object2"]
+[editable path="Object3"]
+[editable path="Object4"]
