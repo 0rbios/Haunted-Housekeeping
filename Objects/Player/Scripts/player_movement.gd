@@ -11,8 +11,8 @@ var dashing = false
 var velocity = Vector3(0, 0, 0)
 
 # Carrying
-var carryingNode
-var playerHovering = false
+var carryingNode = null
+var hoverOver = null
 
 # Functions --------------------
 
@@ -70,9 +70,14 @@ func _physics_process(_delta):
 			self.set_collision_layer_value(4, true)
 			dashing = true
 			if carryingNode != null:
-				carryingNode.drop()
-				carryingNode = null
+				drop()
 			$"Dash Timer".start()
+	
+	if Input.is_action_just_pressed("Interact"):
+		if carryingNode == null and hoverOver != null:
+			pickup()
+		elif carryingNode != null:
+			drop()
 	
 	var toBeNormalized = Vector2(horizontal, long).normalized()
 	velocity = Vector3(toBeNormalized.x * activeSpeed, 0, toBeNormalized.y * activeSpeed)
@@ -85,3 +90,21 @@ func _dash_complete():
 	self.set_collision_layer_value(4, false)
 	activeSpeed = baseSpeed
 	dashing = false
+
+func pickup():
+	carryingNode = hoverOver
+	carryingNode.carriedBy = self
+
+func drop():
+	carryingNode.position = Vector3(0, 0, 0)
+	carryingNode.pivot.position = self.position
+	carryingNode.carriedBy = null
+	carryingNode = null
+
+func _touching_node(body):
+	if body.is_in_group("object"):
+		hoverOver = body
+
+func _leave_node(body):
+	if body.is_in_group("object"):
+		hoverOver = null

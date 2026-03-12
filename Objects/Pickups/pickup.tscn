@@ -9,8 +9,6 @@ albedo_color = Color(0, 0, 1, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_l2ofb"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_7kwjt"]
-
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_7kwjt"]
 properties/0/path = NodePath("..:position")
 properties/0/spawn = true
@@ -37,14 +35,6 @@ shape = SubResource("BoxShape3D_rfk7t")
 material_overlay = SubResource("StandardMaterial3D_7kwjt")
 mesh = SubResource("BoxMesh_l2ofb")
 
-[node name="Pickup Box" type="Area3D" parent="Object" unique_id=286331205]
-
-[node name="Hitbox" type="CollisionShape3D" parent="Object/Pickup Box" unique_id=1258640100]
-shape = SubResource("BoxShape3D_7kwjt")
-
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=283157735]
 root_path = NodePath("../Object")
 replication_config = SubResource("SceneReplicationConfig_7kwjt")
-
-[connection signal="body_entered" from="Object/Pickup Box" to="Object" method="_collision_enter"]
-[connection signal="body_exited" from="Object/Pickup Box" to="Object" method="_collision_exit"]
