@@ -12,9 +12,11 @@ extends RigidBody3D
 
 # Functions --------------------
 
+# Making Names Consistent Across Clients/Server
 func _ready():
 	pivot.name = nodeName
 
+# If The Current Game Instance (Client/Server) Is The Owner Of This Object, Manage The Physics And Positioning Of The Object
 func _physics_process(_delta):
 	if is_multiplayer_authority():
 		self.freeze = linear_velocity.y == 0

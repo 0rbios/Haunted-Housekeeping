@@ -102,7 +102,7 @@ func pickup():
 	carryingNode.carriedBy = self
 
 func drop():
-	carryingNode.position = Vector3(0, 0, 0)
+	carryingNode.position = Vector3(0,0, 0)
 	carryingNode.pivot.position = self.position
 	carryingNode.carriedBy = null
 	carryingNode = null
