@@ -18,7 +18,7 @@ func spawn_player(id: int):
 func delete_player(id: int):
 	if not get_node(spawn_path).has_node(str(id)):
 		return
-	get_node(spawn_path).get_node(str(id)).queue_free()
+	get_node(spawn_path).get_node(str(id)).call_deferred("queue_free")
 
 func _input(_event: InputEvent):
 	if Input.is_action_just_pressed("ui_cancel"):
