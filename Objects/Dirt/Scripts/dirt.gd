@@ -3,8 +3,13 @@ extends Area3D
 # Variables --------------------
 
 @export var cleanedBy: Array
+@onready var dirtManager = $".."
 
 # Functions ------------------
+
+func _process(_delta):
+	if !dirtManager.dirtState.has(self):
+		self.queue_free()
 
 func _collision_detected(body: Node3D):
 	if body.is_in_group("object") and Input.is_action_pressed("Use"):
@@ -13,4 +18,6 @@ func _collision_detected(body: Node3D):
 
 @rpc("any_peer", "call_local")
 func _clean_dirt():
-	queue_free()
+	if is_multiplayer_authority():
+		dirtManager.dirtState.erase(self)
+		queue_free()

@@ -10,9 +10,10 @@ albedo_color = Color(0, 0, 0, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_qciar"]
 material = SubResource("StandardMaterial3D_3h8vs")
 
-[node name="Dirt" type="Area3D" unique_id=21112982]
+[node name="Dirt" type="Area3D" unique_id=21112982 groups=["dirt"]]
 collision_mask = 5
 script = ExtResource("1_3h8vs")
+cleanedBy = null
 
 [node name="Hitbox" type="CollisionShape3D" parent="." unique_id=682239480]
 shape = SubResource("BoxShape3D_sr40l")

@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://7weh2gc0dfrp" path="res://Maps/HUD/hud.tscn" id="7_aieuy"]
 [ext_resource type="PackedScene" uid="uid://bydgq1bvyaibu" path="res://Objects/Player/player.tscn" id="8_rp06g"]
 [ext_resource type="PackedScene" uid="uid://cl876uiox5x3f" path="res://Objects/Camera/camera.tscn" id="9_rp06g"]
-[ext_resource type="Script" uid="uid://bbv77sfeannve" path="res://Multiplayer/dirt_manager.gd" id="10_fwmhw"]
+[ext_resource type="Script" uid="uid://brq4wt2ulhct5" path="res://Multiplayer/dirt_manager.gd" id="10_fwmhw"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lvjdj"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -27,13 +27,7 @@ tonemap_exposure = 2.0
 adjustment_enabled = true
 adjustment_brightness = 1.3
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_fwmhw"]
-properties/0/path = NodePath(".:dirtState")
-properties/0/spawn = true
-properties/0/replication_mode = 1
-
 [node name="Node3D" type="Node3D" unique_id=1390304786]
-script = ExtResource("10_fwmhw")
 
 [node name="Environment" type="WorldEnvironment" parent="." unique_id=900787361]
 environment = SubResource("Environment_txpwr")
@@ -108,8 +102,8 @@ script = ExtResource("7_4gr4l")
 networkPlayer = ExtResource("8_rp06g")
 networkCamera = ExtResource("9_rp06g")
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=410727316]
-replication_config = SubResource("SceneReplicationConfig_fwmhw")
+[node name="Dirt Manager" type="Node" parent="." unique_id=1543009655]
+script = ExtResource("10_fwmhw")
 
 [editable path="First Mop"]
 [editable path="Second Mop"]
