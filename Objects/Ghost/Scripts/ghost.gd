@@ -99,6 +99,3 @@ func _drop_node():
 		carryingNode.pivot.position = self.position
 		carryingNode.carriedBy = null
 		carryingNode = null
-	
-	if is_multiplayer_authority():
-		print("Dropped Node")
