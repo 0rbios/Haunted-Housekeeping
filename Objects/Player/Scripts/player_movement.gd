@@ -16,12 +16,15 @@ var hoverOver = null
 
 # Functions --------------------
 
+# Set The Controller Of This Node To Be The Name Of The Node
 func _enter_tree():
 	set_multiplayer_authority(name.to_int())
 
 func _physics_process(_delta):
+	# Only Handle Movement When The Player Owns The Node
 	if !is_multiplayer_authority(): return
 	
+	# "Use" The Held Node (Currently Slows The Player And Puts The Node Infront Of Them)
 	if carryingNode != null:
 		if Input.is_action_pressed("Use"):
 			carryingNode.position.z = -1
@@ -32,6 +35,7 @@ func _physics_process(_delta):
 			carryingNode.position.y = 1
 			activeSpeed = baseSpeed
 	
+	# Take Movement Input
 	if dashing == false:
 		if Input.is_action_just_pressed("Left"):
 			horizontal = -1
@@ -65,6 +69,7 @@ func _physics_process(_delta):
 			else:
 				long = 0
 		
+		# Dash Handling
 		if Input.is_action_just_pressed("Dash") and velocity != Vector3(0, 0, 0):
 			activeSpeed = baseSpeed * 3
 			self.set_collision_layer_value(4, true)
@@ -73,24 +78,29 @@ func _physics_process(_delta):
 				drop()
 			$"Dash Timer".start()
 	
+	# Pick Up Or Drop Held Item
 	if Input.is_action_just_pressed("Interact"):
 		if carryingNode == null and hoverOver != null:
 			pickup()
 		elif carryingNode != null:
 			drop()
 	
+	# Movement Actuation
 	var toBeNormalized = Vector2(horizontal, long).normalized()
 	velocity = Vector3(toBeNormalized.x * activeSpeed, 0, toBeNormalized.y * activeSpeed)
 	apply_force(velocity)
 	
+	# Rotate In Movement Direction
 	if velocity != Vector3(0, 0, 0):
 		look_at(self.global_position + velocity)
-	
+
+# Reset After Dashing
 func _dash_complete():
 	self.set_collision_layer_value(4, false)
 	activeSpeed = baseSpeed
 	dashing = false
 
+# Signal For Updating Pickup Authority So It Can be Controlled Correctly
 @rpc("any_peer", "call_local")
 func change_auth(node, id):
 	get_node(node).set_multiplayer_authority(id)

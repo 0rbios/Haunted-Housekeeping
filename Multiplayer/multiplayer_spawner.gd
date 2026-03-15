@@ -1,8 +1,14 @@
 extends MultiplayerSpawner
 
+# Variables --------------------
+
 @export var networkPlayer: PackedScene
 @export var networkCamera: PackedScene
 
+# Functions --------------------
+
+# Set Up Links To Spawn And Delete Player Characters On All Game Instances
+# When Players Join Or Leave Game
 func _ready():
 	multiplayer.peer_connected.connect(spawn_player)
 	multiplayer.peer_disconnected.connect(delete_player)

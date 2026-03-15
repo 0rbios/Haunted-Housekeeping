@@ -8,6 +8,7 @@ extends Area3D
 # Functions ------------------
 
 func _process(_delta):
+	# Deletes Any Already Cleaned Dirt On Load
 	if !dirtManager.dirtState.has(self):
 		self.queue_free()
 

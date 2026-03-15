@@ -1,9 +1,13 @@
 extends Node
 
+# Variables --------------------
+
+# Server Settings
 const PORT = 6666
 const IPADDRESS = "localhost"
-
 var peer = ENetMultiplayerPeer.new()
+
+# Functions --------------------
 
 func _ready():
 	if MultiplayerSettings.clientType == "host":
