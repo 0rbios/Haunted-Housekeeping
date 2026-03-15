@@ -15,11 +15,14 @@ config/version="P.0.0"
 run/main_scene="uid://dttw5tp4dbpv7"
 config/features=PackedStringArray("4.6", "Forward Plus")
 
+[autoload]
+
+MultiplayerSettings="*uid://pkhgq28kmmro"
+
 [display]
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
-window/size/mode=3
 window/size/resizable=false
 window/stretch/mode="viewport"
 
@@ -28,6 +31,7 @@ window/stretch/mode="viewport"
 player=""
 object=""
 ghost=""
+dirt=""
 
 [input]
 

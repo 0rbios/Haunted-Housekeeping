@@ -4,38 +4,23 @@ extends RigidBody3D
 
 # Unique ID
 @export var pickupType: String
+@export var nodeName: String
 
 # Carrying
-var possibleCarrier = null
-var carriedBy = null
+@export var carriedBy = null
+@onready var pivot = $".."
 
 # Functions --------------------
 
+# Making Names Consistent Across Clients/Server
+func _ready():
+	pivot.name = nodeName
+
+# If The Current Game Instance (Client/Server) Is The Owner Of This Object, Manage The Physics And Positioning Of The Object
 func _physics_process(_delta):
-	self.freeze = linear_velocity.y == 0
-	
-	if Input.is_action_just_pressed("Interact"):
-		if carriedBy == null and possibleCarrier != null:
-			carriedBy = possibleCarrier
-			self.position = Vector3(0,0,0)
-			carriedBy.carryingNode = self
-			reparent(carriedBy, false)
-			self.rotation = Vector3(0, 0, 0)
-		elif carriedBy != null:
-			drop()
-	
-func _collision_enter(body: Node3D):
-	if body.is_in_group("player") and !body.playerHovering:
-		body.playerHovering = true
-		possibleCarrier = body
-
-func _collision_exit(body: Node3D):
-	if body.is_in_group("player"):
-		body.playerHovering = false
-		possibleCarrier = null
-
-func drop():
-	self.position = carriedBy.position
-	carriedBy.carryingNode = null
-	carriedBy = null
-	reparent(get_tree().root, false)
+	if is_multiplayer_authority():
+		self.freeze = linear_velocity.y == 0
+		
+		if carriedBy != null:
+			pivot.position = carriedBy.position
+			pivot.rotation = carriedBy.rotation
