@@ -26,28 +26,20 @@ offset_left = 1131.0
 offset_top = 691.0
 offset_right = 1273.0
 offset_bottom = 714.0
-text = "Prototype 1 (P.0.0)"
+text = "Prototype 2 (P.1.0)"
 
 [node name="Compiled Date" type="Label" parent="CanvasLayer" unique_id=294270488]
 offset_left = 7.0
 offset_top = 689.0
 offset_right = 76.0
 offset_bottom = 712.0
-text = "Mar-9-26-18-05"
-
-[node name="Host Button" type="Button" parent="CanvasLayer" unique_id=963611272]
-offset_left = 449.0
-offset_top = 367.0
-offset_right = 594.0
-offset_bottom = 433.0
-theme_override_font_sizes/font_size = 38
-text = "Host"
+text = "Not Compiled"
 
 [node name="Join Button" type="Button" parent="CanvasLayer" unique_id=1581908819]
-offset_left = 570.0
-offset_top = 465.0
-offset_right = 715.0
-offset_bottom = 531.0
+offset_left = 444.0
+offset_top = 364.0
+offset_right = 589.0
+offset_bottom = 430.0
 theme_override_font_sizes/font_size = 38
 text = "Join"
 
@@ -59,6 +51,12 @@ offset_bottom = 432.0
 theme_override_font_sizes/font_size = 38
 text = "Exit"
 
-[connection signal="pressed" from="CanvasLayer/Host Button" to="." method="_play_pressed"]
+[node name="IP Entry" type="LineEdit" parent="CanvasLayer" unique_id=693540252]
+offset_left = 423.0
+offset_top = 449.0
+offset_right = 614.0
+offset_bottom = 480.0
+placeholder_text = "IP Address"
+
 [connection signal="pressed" from="CanvasLayer/Join Button" to="." method="_join_pressed"]
 [connection signal="pressed" from="CanvasLayer/Exit Button" to="." method="_exit_button"]

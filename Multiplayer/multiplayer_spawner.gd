@@ -12,7 +12,6 @@ extends MultiplayerSpawner
 func _ready():
 	multiplayer.peer_connected.connect(spawn_player)
 	multiplayer.peer_disconnected.connect(delete_player)
-	spawn_player(multiplayer.get_unique_id())
 
 func spawn_player(id: int):
 	if !multiplayer.is_server(): return

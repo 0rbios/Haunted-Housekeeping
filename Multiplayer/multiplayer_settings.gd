@@ -4,3 +4,4 @@ extends Node
 # The Main Menu And The Map
 
 var clientType: String
+var Ip: String
