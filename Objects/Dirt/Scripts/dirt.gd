@@ -8,5 +8,10 @@ extends Area3D
 
 func _collision_detected(body: Node3D):
 	if body.is_in_group("object") and Input.is_action_pressed("Use"):
-		if cleanedBy.has(body.pickupType) and is_multiplayer_authority():
-			self.visible = false
+		if cleanedBy.has(body.pickupType):
+			_clean_dirt.rpc()
+
+@rpc("any_peer", "call_remote")
+func _clean_dirt():
+	if is_multiplayer_authority():
+		self.visible = false
