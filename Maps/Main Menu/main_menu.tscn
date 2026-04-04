@@ -35,6 +35,28 @@ offset_right = 76.0
 offset_bottom = 712.0
 text = "Not Compiled"
 
+[node name="Create Room Button" type="Button" parent="CanvasLayer" unique_id=2071623039]
+offset_left = 570.0
+offset_top = 477.0
+offset_right = 715.0
+offset_bottom = 543.0
+theme_override_font_sizes/font_size = 26
+text = "New Room"
+
+[node name="Room Name" type="LineEdit" parent="CanvasLayer" unique_id=960625116]
+offset_left = 570.0
+offset_top = 551.0
+offset_right = 714.0
+offset_bottom = 584.0
+placeholder_text = "Room Name"
+
+[node name="Room Code" type="LineEdit" parent="CanvasLayer" unique_id=1170607413]
+offset_left = 571.0
+offset_top = 589.0
+offset_right = 713.0
+offset_bottom = 620.0
+placeholder_text = "Room Code"
+
 [node name="Join Button" type="Button" parent="CanvasLayer" unique_id=1581908819]
 offset_left = 444.0
 offset_top = 364.0
@@ -52,11 +74,13 @@ theme_override_font_sizes/font_size = 38
 text = "Exit"
 
 [node name="IP Entry" type="LineEdit" parent="CanvasLayer" unique_id=693540252]
+visible = false
 offset_left = 423.0
 offset_top = 449.0
 offset_right = 614.0
 offset_bottom = 480.0
 placeholder_text = "IP Address"
 
+[connection signal="pressed" from="CanvasLayer/Create Room Button" to="." method="_make_room_clicked"]
 [connection signal="pressed" from="CanvasLayer/Join Button" to="." method="_join_pressed"]
 [connection signal="pressed" from="CanvasLayer/Exit Button" to="." method="_exit_button"]

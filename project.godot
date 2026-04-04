@@ -12,12 +12,8 @@ config_version=5
 
 config/name="Project: Haunted Housekeeper"
 config/version="P.0.0"
-run/main_scene="uid://dttw5tp4dbpv7"
+run/main_scene="uid://dao7w6ggctif6"
 config/features=PackedStringArray("4.6", "Forward Plus")
-
-[autoload]
-
-MultiplayerSettings="*uid://pkhgq28kmmro"
 
 [display]
 

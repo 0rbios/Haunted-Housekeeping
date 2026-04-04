@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://bljsojgbqg2r4"]
+
+[ext_resource type="Script" uid="uid://ggc0i0exxa5e" path="res://Maps/Room/Scripts/DEBUGINFO.gd" id="1_jx5ll"]
+
+[node name="Room" type="Control" unique_id=1391257497]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DEBUG" type="Label" parent="." unique_id=339859873]
+layout_mode = 0
+offset_left = 252.0
+offset_top = 157.0
+offset_right = 1025.0
+offset_bottom = 550.0
+theme_override_font_sizes/font_size = 50
+autowrap_mode = 2
+script = ExtResource("1_jx5ll")

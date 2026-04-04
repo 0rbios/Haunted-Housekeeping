@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://dao7w6ggctif6"]
+
+[ext_resource type="Script" uid="uid://5wsluyyrv5q5" path="res://Multiplayer/legend_tree_manager.gd" id="1_8ijvc"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_i8pxd"]
+properties/0/path = NodePath(".:rooms")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[node name="Legend Tree" type="Node" unique_id=1630742226]
+script = ExtResource("1_8ijvc")
+
+[node name="Legend Sync" type="MultiplayerSynchronizer" parent="." unique_id=539097584]
+replication_config = SubResource("SceneReplicationConfig_i8pxd")
