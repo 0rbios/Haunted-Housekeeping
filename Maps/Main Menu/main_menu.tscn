@@ -49,6 +49,7 @@ offset_top = 551.0
 offset_right = 714.0
 offset_bottom = 584.0
 placeholder_text = "Room Name"
+max_length = 16
 
 [node name="Room Code" type="LineEdit" parent="CanvasLayer" unique_id=1170607413]
 offset_left = 571.0
@@ -56,6 +57,7 @@ offset_top = 589.0
 offset_right = 713.0
 offset_bottom = 620.0
 placeholder_text = "Room Code"
+max_length = 8
 
 [node name="Join Button" type="Button" parent="CanvasLayer" unique_id=1581908819]
 offset_left = 444.0
