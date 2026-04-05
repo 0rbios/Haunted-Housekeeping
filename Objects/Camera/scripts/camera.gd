@@ -12,7 +12,7 @@ var camMode = "normal"
 
 # Sets The Player's View To Be The Camera Of Their Player
 func _ready():
-	self.current = is_multiplayer_authority()
+	self.current = following.name == str(multiplayer.get_unique_id())
 
 func _physics_process(_delta):
 	if Input.is_action_just_pressed("SwitchCam"):

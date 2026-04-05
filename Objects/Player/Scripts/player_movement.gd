@@ -2,6 +2,8 @@ extends RigidBody3D
 
 # Variables --------------------
 
+@onready var legend = get_tree().root.get_child(0)
+
 # Movement
 var baseSpeed = 110
 var activeSpeed = 110
@@ -16,9 +18,11 @@ var hoverOver = null
 
 # Functions --------------------
 
-# Set The Controller Of This Node To Be The Name Of The Node
-func _enter_tree():
+func _ready():
 	set_multiplayer_authority(name.to_int())
+	var sync = $MultiplayerSynchronizer
+	for player in legend.find_active_room().players:
+		sync.set_visibility_for(player, true)
 
 func _physics_process(_delta):
 	# Only Handle Movement When The Player Owns The Node

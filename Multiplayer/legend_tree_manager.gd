@@ -2,7 +2,7 @@ extends Node
 
 # Variables --------------------
 
-# Refrence To Load Main Menu
+# Refrences
 const mainMenu = preload("res://Maps/Main Menu/main_menu.tscn")
 
 # Server Settings
@@ -15,14 +15,17 @@ var activeRoom
 
 # Functions --------------------
 
-func clean_tree(nextNode = mainMenu):
-	var sync = self.find_child("Legend Sync", true, false)
-	for node in self.get_children():
-		if node != sync:
-			self.remove_child(node)
-	var nextNodeInstance = nextNode.instantiate()
-	self.add_child(nextNodeInstance)
+# Delete All Legend Children Except For Synchroniser And Load New Scene
+func clean_tree(nextNode = mainMenu):                                           # Takes A Map Argument, Defaults To The Main Menu
+	if !multiplayer.is_server():                                                # Only Runs On Clients
+		var sync = self.find_child("Legend Sync", true, false)
+		for node in self.get_children():
+			if node != sync:
+				self.remove_child(node)
+		var nextNodeInstance = nextNode.instantiate()
+		self.add_child(nextNodeInstance)
 
+# Gets The Local IP Adress From The Dedicated Server Computer
 func get_local_ip():
 	var addresses = IP.get_local_addresses()
 	for ip in addresses:
@@ -31,11 +34,10 @@ func get_local_ip():
 			return ip
 	return "IP not found"
 
+# Creates A Server On The Dedicated Server Version And A Client On Anything Else
 func _ready():
 	if OS.has_feature("dedicated_server"):
-		print("Starting dedicated server...")
 		create_server()
-		_load_menus()
 	else:
 		create_client()
 		clean_tree()
@@ -50,11 +52,40 @@ func create_client():
 	peer.create_client("127.0.0.1", PORT)
 	multiplayer.multiplayer_peer = peer
 
-func _load_menus():
+@rpc("any_peer", "call_local")
+func leave_room(roomName, playerID):
+	for room in rooms:
+		if room.name == roomName:
+			if playerID == room.owner:
+				if room.players.size() < 2:
+					rooms.remove_at(rooms.find(room))
+				else:
+					room.players.remove_at(room.players.find(playerID))
+					room.owner = room.players[0]
+			else:
+				room.players.remove_at(room.players.find(playerID))
+
+@rpc("any_peer", "call_remote")
+func update_owner_clientside():
 	var roomMenu = load("res://Maps/Room/Room.tscn")
-	
-	var mainMenuInstance = mainMenu.instantiate()
-	var roomMenuInstance = roomMenu.instantiate()
-	
-	self.add_child(mainMenuInstance)
-	self.add_child(roomMenuInstance)
+	clean_tree(roomMenu)
+
+@rpc("any_peer", "call_local")
+func load_map():
+	var debug = load("res://Temp/debug.tscn")
+	clean_tree(debug)
+
+@rpc("any_peer", "call_local")
+func create_room(roomName: String, roomCode: String, roomOwner: int):
+	rooms.push_back({"name": roomName, "code": roomCode, "owner": roomOwner, "players": [roomOwner]})
+
+@rpc("any_peer", "call_local")
+func join_room(roomName: String, playerID: int):
+	for room in rooms:
+		if room.name == roomName:
+			room.players.push_back(playerID)
+
+func find_active_room():
+	for room in rooms:
+		if room.name == activeRoom:
+			return room

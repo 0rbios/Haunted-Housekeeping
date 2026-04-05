@@ -2,6 +2,8 @@ extends RigidBody3D
 
 # Variables --------------------
 
+@onready var legend = get_tree().root.get_child(0)
+
 # Movement
 var speed = 5
 
@@ -17,6 +19,11 @@ var pickupObject
 var canChoose = false
 
 # Functions --------------------
+
+func _ready():
+	var sync = $"Ghost Synchronizer"
+	for player in legend.find_active_room().players:
+		sync.set_visibility_for(player, true)
 
 # When The Ghost Finishes Waiting, Chooses Its Next Action
 func _rest_over():

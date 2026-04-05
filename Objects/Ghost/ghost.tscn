@@ -37,6 +37,7 @@ one_shot = true
 
 [node name="Ghost Synchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1606127211]
 replication_config = SubResource("SceneReplicationConfig_k7762")
+public_visibility = false
 
 [connection signal="body_entered" from="." to="." method="_collision_detected"]
 [connection signal="timeout" from="Rest Timer" to="." method="_rest_over"]

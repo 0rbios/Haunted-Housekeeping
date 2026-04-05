@@ -55,6 +55,7 @@ wait_time = 0.2
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1334092816]
 replication_config = SubResource("SceneReplicationConfig_156m4")
+public_visibility = false
 
 [node name="Camera" parent="." unique_id=2121184713 instance=ExtResource("2_yw17q")]
 

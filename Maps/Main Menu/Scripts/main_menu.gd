@@ -23,7 +23,7 @@ func _join_pressed():
 			print("Room Found")
 			if room.code == codeEntry.text:
 				print("Valid Code")
-				_join_room.rpc_id(1, room.name, str(multiplayer.get_unique_id()))
+				legend.join_room.rpc_id(1, room.name, multiplayer.get_unique_id())
 				legend.activeRoom = room.name
 				legend.clean_tree(roomMenu)
 			else:
@@ -43,7 +43,7 @@ func _make_room_clicked():
 	elif codeEntry.text.remove_chars(" ") == "":
 		print("Room Code Required")
 	else:
-		_create_room.rpc_id(1, str(nameEntry.text.remove_chars(" ")), str(codeEntry.text.remove_chars(" ")), str(multiplayer.get_unique_id()))
+		legend.create_room.rpc_id(1, str(nameEntry.text.remove_chars(" ")), str(codeEntry.text.remove_chars(" ")), multiplayer.get_unique_id())
 		legend.activeRoom = str(nameEntry.text.remove_chars(" "))
 		legend.clean_tree(roomMenu)
 
@@ -51,17 +51,3 @@ func _checkForExisting():
 	for room in legend.rooms:
 		if room.name == nameEntry.text.remove_chars(" "):
 			return true
-
-@rpc("any_peer", "call_local")
-func _create_room(roomName, roomCode, roomOwner):
-	legend.rooms.push_back({"name": roomName, "code": roomCode, "owner": roomOwner, "players": [roomOwner]})
-	print("A New Room Has Been Made")
-	print(legend.rooms)
-
-@rpc("any_peer", "call_local")
-func _join_room(roomName, playerID):
-	for room in legend.rooms:
-		if room.name == roomName:
-			room.players.push_back(playerID)
-	print("Player Joined Room " + roomName + ", Updated Room List:")
-	print(legend.rooms)
