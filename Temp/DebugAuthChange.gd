@@ -14,5 +14,17 @@ func _ready():
 					var ghostInstance = ghostScene.instantiate()
 					ghostInstance.position = Vector3(entity.position[0], entity.position[1], entity.position[2])
 					self.add_child(ghostInstance)
+				"pickup":
+					var pickupScene = load("res://Objects/Pickups/pickup.tscn")
+					var pickupInstance = pickupScene.instantiate()
+					pickupInstance.position = Vector3(entity.position[0], entity.position[1], entity.position[2])
+					pickupInstance.get_child(0).pickupType = entity.pickup
+					self.add_child(pickupInstance)
+				"dirt":
+					var dirtScene = load("res://Objects/Dirt/dirt.tscn")
+					var dirtInstance = dirtScene.instantiate()
+					dirtInstance.position = Vector3(entity.position[0], entity.position[1], entity.position[2])
+					dirtInstance.cleanedBy = entity.cleanedBy
+					self.add_child(dirtInstance)
 		self.set_multiplayer_authority(legend.find_active_room().owner, true)
 		spawner.spawn_players()

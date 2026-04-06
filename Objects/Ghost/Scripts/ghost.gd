@@ -3,6 +3,7 @@ extends RigidBody3D
 # Variables --------------------
 
 @onready var legend = get_tree().root.get_child(0)
+var auth
 
 # Movement
 var speed = 5
@@ -15,25 +16,19 @@ var objects
 var pickupObject
 @export var carryingNode = null
 
-# Multiplayer
-var canChoose = false
-
 # Functions --------------------
 
 func _ready():
 	var sync = $"Ghost Synchronizer"
 	for player in legend.find_active_room().players:
 		sync.set_visibility_for(player, true)
+	auth = legend.find_active_room().owner
+	if multiplayer.get_unique_id() == auth:
+		_choose_action()
 
 # When The Ghost Finishes Waiting, Chooses Its Next Action
 func _rest_over():
 	_choose_action()
-
-# An Overly Complicated Way To Stop Ghosts From Having AI On Clients
-func _physics_process(_delta):
-	if multiplayer.is_server() and canChoose == false:
-		canChoose = true
-		_choose_action()
 
 # Picks One Of A List Of Possible Actions
 func _choose_action():
@@ -66,7 +61,7 @@ func _move_finished_grab():
 # If The Ghost Is Holding An Object, Drop It. Otherwise, Find The Nearest Object And Move To It
 func _pickup():
 	if carryingNode != null:
-		_drop_node.rpc_id(1)
+		_drop_node.rpc_id(auth)
 		_choose_action()
 	else:
 		# IF NO ITEMS ARE EVER CREATED OR DESTROYED THEN THIS SHOULD BE MOVED TO _READY
@@ -90,7 +85,7 @@ func _pickup():
 # If The Player Dashes Into The Ghost, The Ghost Drops Any Held Objects
 func _collision_detected(body):
 	if body.is_in_group("player") and body.dashing:
-		_drop_node.rpc_id(1)
+		_drop_node.rpc_id(auth)
 
 # Set The Ghost's Held Object To Its Target And Set The Target's Holder To The Ghost
 func _pickup_node():

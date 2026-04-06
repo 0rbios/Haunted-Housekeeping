@@ -40,3 +40,4 @@ mesh = SubResource("BoxMesh_l2ofb")
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=283157735]
 root_path = NodePath("../Object")
 replication_config = SubResource("SceneReplicationConfig_7kwjt")
+public_visibility = false

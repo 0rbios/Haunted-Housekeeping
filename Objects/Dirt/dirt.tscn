@@ -27,5 +27,6 @@ mesh = SubResource("BoxMesh_qciar")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1389438817]
 replication_config = SubResource("SceneReplicationConfig_3h8vs")
+public_visibility = false
 
 [connection signal="body_entered" from="." to="." method="_collision_detected"]
