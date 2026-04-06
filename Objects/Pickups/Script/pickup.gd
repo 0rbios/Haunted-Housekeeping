@@ -4,6 +4,8 @@ extends RigidBody3D
 
 @onready var legend = get_tree().root.get_child(0)
 var auth
+var syncedPlayers = []
+@onready var sync = $"../MultiplayerSynchronizer"
 
 # Unique ID
 var pickupType: String
@@ -16,10 +18,19 @@ var carriedBy = null
 
 # Making Names Consistent Across Clients/Server
 func _ready():
-	var sync = $"../MultiplayerSynchronizer"
 	for player in legend.find_active_room().players:
 		sync.set_visibility_for(player, true)
 	auth = legend.find_active_room().owner
+
+func _process(_delta):
+	for player in syncedPlayers:
+		if !legend.find_active_room().players.has(player):
+			sync.set_visibility_for(player, false)
+			syncedPlayers.remove_at(syncedPlayers.find(player))
+	for player in legend.find_active_room().players:
+		if !syncedPlayers.has(player):
+			sync.set_visibility_for(player, true)
+			syncedPlayers.push_back(player)
 
 # If The Current Game Instance (Client/Server) Is The Owner Of This Object, Manage The Physics And Positioning Of The Object
 func _physics_process(_delta):

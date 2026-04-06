@@ -3,6 +3,9 @@ extends RigidBody3D
 # Variables --------------------
 
 @onready var legend = get_tree().root.get_child(0)
+var roomOwner
+@onready var sync = $MultiplayerSynchronizer
+var syncedPlayers = []
 
 # Movement
 var baseSpeed = 110
@@ -20,9 +23,23 @@ var hoverOver = null
 
 func _ready():
 	set_multiplayer_authority(name.to_int())
-	var sync = $MultiplayerSynchronizer
 	for player in legend.find_active_room().players:
 		sync.set_visibility_for(player, true)
+		syncedPlayers.push_back(player)
+	roomOwner = legend.find_active_room().owner
+
+func _process(_delta):
+	for player in syncedPlayers:
+		if !legend.find_active_room().players.has(player):
+			sync.set_visibility_for(player, false)
+			syncedPlayers.remove_at(syncedPlayers.find(player))
+	for player in legend.find_active_room().players:
+		if !syncedPlayers.has(player):
+			sync.set_visibility_for(player, true)
+			syncedPlayers.push_back(player)
+
+func _player_left_game(id: int):
+	sync.set_visibility_for(id, false)
 
 func _physics_process(_delta):
 	# Only Handle Movement When The Player Owns The Node
@@ -119,6 +136,7 @@ func drop():
 	carryingNode.position = Vector3(0,0, 0)
 	carryingNode.pivot.position = self.position
 	carryingNode.carriedBy = null
+	change_auth.rpc(carryingNode.get_parent().get_path(), roomOwner)
 	carryingNode = null
 
 func _touching_node(body):
