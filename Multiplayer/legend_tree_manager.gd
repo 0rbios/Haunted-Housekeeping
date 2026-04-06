@@ -36,6 +36,8 @@ func get_local_ip():
 
 # Creates A Server On The Dedicated Server Version And A Client On Anything Else
 func _ready():
+	multiplayer.peer_disconnected.connect(player_disconnecting)
+	
 	if OS.has_feature("dedicated_server"):
 		create_server()
 	else:
@@ -51,6 +53,19 @@ func create_server():
 func create_client():
 	peer.create_client("127.0.0.1", PORT)
 	multiplayer.multiplayer_peer = peer
+
+func player_disconnecting(id: int):
+	if multiplayer.is_server():
+		for room in rooms:
+			if room.players.has(id):
+				if id == room.owner:
+					if room.players.size() < 2:
+						rooms.remove_at(rooms.find(room))
+					else:
+						room.players.remove_at(room.players.find(id))
+						room.owner = room.players[0]
+				else:
+					room.players.remove_at(room.players.find(id))
 
 @rpc("any_peer", "call_local")
 func leave_room(roomName, playerID):

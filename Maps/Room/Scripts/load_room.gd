@@ -9,7 +9,6 @@ extends Control
 # Functions --------------------
 
 func _ready():
-	multiplayer.peer_disconnected.connect(player_disconnecting)
 	if typeof(legend.activeRoom) != TYPE_NIL:
 		roomNameText.text = legend.activeRoom
 	else:
@@ -23,25 +22,14 @@ func _process(_delta):
 		else:
 			startButton.visible = false
 
+# Occurs When A Player Clicks "Leave"
 func _player_leaving():
 	legend.leave_room.rpc_id(1, legend.activeRoom, multiplayer.get_unique_id())
 	for player in legend.find_active_room().players.size():
 		legend.update_owner_clientside.rpc_id(player)
 	legend.clean_tree()
 
-func player_disconnecting(id: int):
-	if multiplayer.is_server():
-		for room in legend.rooms:
-			if room.players.has(id):
-				if id == room.owner:
-					if room.players.size() < 2:
-						legend.rooms.remove_at(legend.rooms.find(room))
-					else:
-						room.players.remove_at(room.players.find(id))
-						room.owner = room.players[0]
-				else:
-					room.players.remove_at(room.players.find(id))
-
+# Occurs When The Room Owner Clicks "Start"
 func _game_started():
 	for player in legend.find_active_room().players:
 		if player != multiplayer.get_unique_id():

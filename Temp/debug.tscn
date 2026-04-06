@@ -22,7 +22,7 @@ tonemap_exposure = 2.0
 adjustment_enabled = true
 adjustment_brightness = 1.3
 
-[node name="Node3D" type="Node3D" unique_id=1390304786]
+[node name="DEBUG" type="Node3D" unique_id=1390304786]
 script = ExtResource("1_rp06g")
 
 [node name="Environment" type="WorldEnvironment" parent="." unique_id=900787361]
