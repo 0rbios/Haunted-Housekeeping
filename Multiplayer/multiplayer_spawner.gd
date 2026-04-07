@@ -21,8 +21,8 @@ func spawn_players():
 
 @rpc("any_peer", "call_local")
 func delete_player(id: int):
-	if DEBUGROOT.get_node(str(id)):
-		DEBUGROOT.get_node(str(id)).call_deferred("queue_free")
+	if DEBUGROOT.has_node(str(id)):
+		DEBUGROOT.get_node(str(id)).queue_free()
 	else:
 		return
 
@@ -32,4 +32,4 @@ func _input(_event: InputEvent):
 		legend.leave_room.rpc_id(1, legend.activeRoom, myID)
 		for player in legend.find_active_room().players:
 			delete_player.rpc_id(player, myID)
-		legend.clean_tree()
+		legend.load_screen.call_deferred()

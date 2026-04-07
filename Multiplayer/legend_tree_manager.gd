@@ -4,6 +4,7 @@ extends Node
 
 # Refrences
 const mainMenu = preload("res://Maps/Main Menu/main_menu.tscn")
+const loadScreen = preload("res://Maps/Loading Screen/load_screen.tscn")
 
 # Server Settings
 const PORT = 6666
@@ -21,9 +22,21 @@ func clean_tree(nextNode = mainMenu):                                           
 		var sync = self.find_child("Legend Sync", true, false)
 		for node in self.get_children():
 			if node != sync:
-				self.remove_child(node)
+				node.queue_free()
 		var nextNodeInstance = nextNode.instantiate()
-		self.add_child(nextNodeInstance)
+		self.call_deferred("add_child", nextNodeInstance)
+
+func load_screen(nextScene = mainMenu):
+	if !multiplayer.is_server():
+		var loadScreenInstance = loadScreen.instantiate()
+		self.add_child(loadScreenInstance)
+		
+		var loadTimer = Timer.new()
+		loadTimer.wait_time = 0.1
+		loadTimer.one_shot = true
+		self.add_child(loadTimer)
+		loadTimer.timeout.connect(clean_tree.bind(nextScene))
+		loadTimer.start()
 
 # Gets The Local IP Adress From The Dedicated Server Computer
 func get_local_ip():
@@ -79,6 +92,7 @@ func leave_room(roomName, playerID):
 					room.owner = room.players[0]
 			else:
 				room.players.remove_at(room.players.find(playerID))
+	activeRoom = null
 
 @rpc("any_peer", "call_remote")
 func update_owner_clientside():
