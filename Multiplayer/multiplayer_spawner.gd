@@ -16,6 +16,7 @@ func spawn_players():
 	for player in legend.find_active_room().players:
 		var playerInstance = networkPlayer.instantiate()
 		playerInstance.name = str(player)
+		playerInstance.position.y = 0.6
 		$"..".call_deferred("add_child", playerInstance)
 
 @rpc("any_peer", "call_local")
@@ -29,9 +30,6 @@ func _input(_event: InputEvent):
 	if Input.is_action_just_pressed("ui_cancel"):
 		var myID = multiplayer.get_unique_id()
 		legend.leave_room.rpc_id(1, legend.activeRoom, myID)
-		delete_for_all.call_deferred(myID)
-		legend.clean_tree.call_deferred()
-
-func delete_for_all(myID):
-	for player in legend.find_active_room().players:
-		delete_player.rpc_id(player, myID)
+		for player in legend.find_active_room().players:
+			delete_player.rpc_id(player, myID)
+		legend.clean_tree()

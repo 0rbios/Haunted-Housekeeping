@@ -17,17 +17,6 @@ albedo_color = Color(0, 0.6350238, 0.4108521, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_156m4"]
 size = Vector3(0.36, 0.745, 0.31)
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_156m4"]
-properties/0/path = NodePath(".:rotation")
-properties/0/spawn = true
-properties/0/replication_mode = 1
-properties/1/path = NodePath(".:position")
-properties/1/spawn = true
-properties/1/replication_mode = 1
-properties/2/path = NodePath(".:carryingNode")
-properties/2/spawn = true
-properties/2/replication_mode = 1
-
 [node name="Player" type="RigidBody3D" unique_id=895042765 groups=["player"]]
 gravity_scale = 0.0
 lock_rotation = true
@@ -52,10 +41,6 @@ mesh = SubResource("BoxMesh_156m4")
 
 [node name="Dash Timer" type="Timer" parent="." unique_id=29579098]
 wait_time = 0.2
-
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1334092816]
-replication_config = SubResource("SceneReplicationConfig_156m4")
-public_visibility = false
 
 [node name="Camera" parent="." unique_id=2121184713 instance=ExtResource("2_yw17q")]
 

@@ -10,11 +10,6 @@ albedo_color = Color(0, 1, 0, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_8iwm6"]
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_k7762"]
-properties/0/path = NodePath(".:position")
-properties/0/spawn = true
-properties/0/replication_mode = 2
-
 [node name="Ghost" type="RigidBody3D" unique_id=774080266 groups=["ghost"]]
 collision_layer = 2
 collision_mask = 10
@@ -34,10 +29,6 @@ mesh = SubResource("SphereMesh_8iwm6")
 
 [node name="Rest Timer" type="Timer" parent="." unique_id=21313540]
 one_shot = true
-
-[node name="Ghost Synchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1606127211]
-replication_config = SubResource("SceneReplicationConfig_k7762")
-public_visibility = false
 
 [connection signal="body_entered" from="." to="." method="_collision_detected"]
 [connection signal="timeout" from="Rest Timer" to="." method="_rest_over"]

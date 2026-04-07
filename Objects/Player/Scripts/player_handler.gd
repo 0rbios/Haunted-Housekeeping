@@ -3,9 +3,9 @@ extends RigidBody3D
 # Variables --------------------
 
 @onready var legend = get_tree().root.get_child(0)
-var roomOwner
-@onready var sync = $MultiplayerSynchronizer
-var syncedPlayers = []
+var ownerID
+var auth
+var myID
 
 # Movement
 var baseSpeed = 110
@@ -22,28 +22,27 @@ var hoverOver = null
 # Functions --------------------
 
 func _ready():
-	set_multiplayer_authority(name.to_int())
-	for player in legend.find_active_room().players:
-		sync.set_visibility_for(player, true)
-		syncedPlayers.push_back(player)
-	roomOwner = legend.find_active_room().owner
+	myID = multiplayer.get_unique_id()
+	auth = int(self.name)
+	ownerID = legend.find_active_room().owner
 
 func _process(_delta):
-	for player in syncedPlayers:
-		if !legend.find_active_room().players.has(player):
-			sync.set_visibility_for(player, false)
-			syncedPlayers.remove_at(syncedPlayers.find(player))
+	if myID != auth:
+		return
+	
 	for player in legend.find_active_room().players:
-		if !syncedPlayers.has(player):
-			sync.set_visibility_for(player, true)
-			syncedPlayers.push_back(player)
+		if player != auth:
+			_synchronise.rpc_id(player, self.position, self.rotation, carryingNode)
 
-func _player_left_game(id: int):
-	sync.set_visibility_for(id, false)
+@rpc("any_peer", "call_local")
+func _synchronise(authPos, authRot, authCarry):
+	self.position = authPos
+	self.rotation = authRot
+	carryingNode = authCarry
 
 func _physics_process(_delta):
 	# Only Handle Movement When The Player Owns The Node
-	if !is_multiplayer_authority(): return
+	if myID != auth: return
 	
 	# "Use" The Held Node (Currently Slows The Player And Puts The Node Infront Of Them)
 	if carryingNode != null:
@@ -124,19 +123,22 @@ func _dash_complete():
 # Signal For Updating Pickup Authority So It Can be Controlled Correctly
 @rpc("any_peer", "call_local")
 func change_auth(node, id):
-	get_node(node).set_multiplayer_authority(id)
+	get_node(node).auth = id
 
 func pickup():
 	carryingNode = hoverOver
-	change_auth.rpc(carryingNode.get_parent().get_path(), name.to_int())
+	for player in legend.find_active_room().players:
+		change_auth.rpc_id(player, carryingNode.get_path(), myID)
 	carryingNode.freeze = true
 	carryingNode.carriedBy = self
 
 func drop():
-	carryingNode.position = Vector3(0,0, 0)
+	carryingNode.position = Vector3(0, 0, 0)
 	carryingNode.pivot.position = self.position
 	carryingNode.carriedBy = null
-	change_auth.rpc(carryingNode.get_parent().get_path(), roomOwner)
+	carryingNode._synchronise.rpc_id(ownerID, self.position, carryingNode.pivot.rotation, Vector3(0, 0, 0), carryingNode.rotation)
+	for player in legend.find_active_room().players:
+		change_auth.rpc_id(player, carryingNode.get_path(), ownerID)
 	carryingNode = null
 
 func _touching_node(body):
