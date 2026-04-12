@@ -4,6 +4,7 @@ extends Node
 
 @onready var legend = get_tree().root.get_child(0)
 @onready var DEBUGROOT = $".."
+@onready var HUD = $"../HUD"
 
 @export var networkPlayer: PackedScene
 
@@ -32,4 +33,5 @@ func _input(_event: InputEvent):
 		legend.leave_room.rpc_id(1, legend.activeRoom, myID)
 		for player in legend.find_active_room().players:
 			delete_player.rpc_id(player, myID)
+		HUD.visible = false
 		legend.load_screen.call_deferred()

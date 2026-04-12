@@ -28,7 +28,8 @@ func _ready():
 
 func _process(_delta):
 	prevAuth = auth
-	auth = legend.find_active_room().owner
+	if typeof(legend.find_active_room()) != TYPE_NIL:
+		auth = legend.find_active_room().owner
 	
 	if myID != auth:
 		return
@@ -36,9 +37,10 @@ func _process(_delta):
 	if prevAuth != auth:
 		_choose_action()
 	
-	for player in legend.find_active_room().players:
-		if player != auth:
-			_synchronise.rpc_id(player, self.position)
+	if typeof(legend.find_active_room()) != TYPE_NIL:
+		for player in legend.find_active_room().players:
+			if player != auth:
+				_synchronise.rpc_id(player, self.position)
 
 @rpc("any_peer", "call_local")
 func _synchronise(authPosition):

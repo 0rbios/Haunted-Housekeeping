@@ -10,10 +10,13 @@ config_version=5
 
 [application]
 
-config/name="Project: Haunted Housekeeper"
-config/version="P.0.0"
+config/name="Haunted Housekeeping"
+config/version="P.1.0"
 run/main_scene="uid://dao7w6ggctif6"
 config/features=PackedStringArray("4.6", "Forward Plus")
+config/icon="uid://ur6tg2mstnok"
+config/macos_native_icon="res://Assets/Ghost/Ghost.icns"
+config/windows_native_icon="res://Assets/Ghost/Ghost.ico"
 
 [display]
 

@@ -20,13 +20,15 @@ func _ready():
 	myID = multiplayer.get_unique_id()
 
 func _process(_delta):
-	auth = legend.find_active_room().owner
+	if typeof(legend.find_active_room()) != TYPE_NIL:
+		auth = legend.find_active_room().owner
 	
 	if myID != auth:
 		return
 	
-	for player in legend.find_active_room().players:
-		_synchronise.rpc_id(player, pivot.position, pivot.rotation, self.position, self.rotation)
+	if typeof(legend.find_active_room()) != TYPE_NIL:
+		for player in legend.find_active_room().players:
+			_synchronise.rpc_id(player, pivot.position, pivot.rotation, self.position, self.rotation)
 
 @rpc("any_peer", "call_local")
 func _synchronise(authPivotPos, authPivotRot, authPos, authRot):

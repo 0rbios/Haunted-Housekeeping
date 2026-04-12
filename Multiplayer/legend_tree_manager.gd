@@ -29,14 +29,8 @@ func clean_tree(nextNode = mainMenu):                                           
 func load_screen(nextScene = mainMenu):
 	if !multiplayer.is_server():
 		var loadScreenInstance = loadScreen.instantiate()
+		loadScreenInstance.loadScene = nextScene
 		self.add_child(loadScreenInstance)
-		
-		var loadTimer = Timer.new()
-		loadTimer.wait_time = 0.1
-		loadTimer.one_shot = true
-		self.add_child(loadTimer)
-		loadTimer.timeout.connect(clean_tree.bind(nextScene))
-		loadTimer.start()
 
 # Gets The Local IP Adress From The Dedicated Server Computer
 func get_local_ip():
