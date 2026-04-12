@@ -4,6 +4,7 @@ extends RigidBody3D
 
 @onready var legend = get_tree().root.get_child(0)
 var auth
+var prevAuth
 var myID
 
 # Movement
@@ -26,8 +27,14 @@ func _ready():
 		_choose_action()
 
 func _process(_delta):
+	prevAuth = auth
+	auth = legend.find_active_room().owner
+	
 	if myID != auth:
 		return
+	
+	if prevAuth != auth:
+		_choose_action()
 	
 	for player in legend.find_active_room().players:
 		if player != auth:

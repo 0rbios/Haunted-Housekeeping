@@ -11,7 +11,6 @@ var myID
 # Functions ------------------
 
 func _ready():
-	auth = legend.find_active_room().owner
 	myID = multiplayer.get_unique_id()
 
 @rpc("any_peer", "call_local")
@@ -19,6 +18,8 @@ func _synchronise(authVisibility):
 	self.visible = authVisibility
 
 func _process(_delta):
+	auth = legend.find_active_room().owner
+	
 	if myID != auth:
 		return
 	

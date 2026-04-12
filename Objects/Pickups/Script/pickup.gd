@@ -18,9 +18,10 @@ var carriedBy = null
 # Making Names Consistent Across Clients/Server
 func _ready():
 	myID = multiplayer.get_unique_id()
-	auth = legend.find_active_room().owner
 
 func _process(_delta):
+	auth = legend.find_active_room().owner
+	
 	if myID != auth:
 		return
 	
