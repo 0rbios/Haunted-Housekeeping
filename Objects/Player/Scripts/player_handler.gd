@@ -24,9 +24,10 @@ var hoverOver = null
 func _ready():
 	myID = multiplayer.get_unique_id()
 	auth = int(self.name)
-	ownerID = legend.find_active_room().owner
 
 func _process(_delta):
+	ownerID = legend.find_active_room().owner
+	
 	if myID != auth:
 		return
 	

@@ -100,13 +100,19 @@ func load_map():
 
 @rpc("any_peer", "call_local")
 func create_room(roomName: String, roomCode: String, roomOwner: int):
-	rooms.push_back({"name": roomName, "code": roomCode, "owner": roomOwner, "players": [roomOwner]})
+	rooms.push_back({"name": roomName, "code": roomCode, "owner": roomOwner, "players": [roomOwner], "started": false})
 
 @rpc("any_peer", "call_local")
 func join_room(roomName: String, playerID: int):
 	for room in rooms:
 		if room.name == roomName:
 			room.players.push_back(playerID)
+
+@rpc("any_peer", "call_local")
+func start_game(roomName):
+	for room in rooms:
+		if room.name == roomName:
+			room.started = true
 
 func find_active_room():
 	for room in rooms:

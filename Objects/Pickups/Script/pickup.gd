@@ -23,6 +23,7 @@ func _process(_delta):
 	if typeof(legend.find_active_room()) != TYPE_NIL:
 		if !legend.find_active_room().players.has(auth):
 			auth = legend.find_active_room().owner
+			self.position = Vector3(0, 0, 0)
 	
 	if myID != auth:
 		return

@@ -31,6 +31,7 @@ func _player_leaving():
 
 # Occurs When The Room Owner Clicks "Start"
 func _game_started():
+	legend.start_game.rpc_id(1, legend.activeRoom)
 	for player in legend.find_active_room().players:
 		if player != multiplayer.get_unique_id():
 			legend.load_map.rpc_id(player)

@@ -20,12 +20,13 @@ func _exit_button():
 func _join_pressed():
 	for room in legend.rooms:
 		if room.name == nameEntry.text:
-			print("Room Found")
 			if room.code == codeEntry.text:
-				print("Valid Code")
-				legend.join_room.rpc_id(1, room.name, multiplayer.get_unique_id())
-				legend.activeRoom = room.name
-				legend.clean_tree(roomMenu)
+				if room.started == false:
+					legend.join_room.rpc_id(1, room.name, multiplayer.get_unique_id())
+					legend.activeRoom = room.name
+					legend.clean_tree(roomMenu)
+				else:
+					print("Room Already Started")
 			else:
 				print("Incorrect Code")
 		else:
