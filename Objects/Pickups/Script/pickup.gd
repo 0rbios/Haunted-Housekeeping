@@ -21,17 +21,18 @@ func _ready():
 
 func _process(_delta):
 	if typeof(legend.find_active_room()) != TYPE_NIL:
-		auth = legend.find_active_room().owner
+		if !legend.find_active_room().players.has(auth):
+			auth = legend.find_active_room().owner
 	
 	if myID != auth:
 		return
 	
 	if typeof(legend.find_active_room()) != TYPE_NIL:
 		for player in legend.find_active_room().players:
-			_synchronise.rpc_id(player, pivot.position, pivot.rotation, self.position, self.rotation)
+			synchronise.rpc_id(player, pivot.position, pivot.rotation, self.position, self.rotation)
 
 @rpc("any_peer", "call_local")
-func _synchronise(authPivotPos, authPivotRot, authPos, authRot):
+func synchronise(authPivotPos, authPivotRot, authPos, authRot):
 	pivot.position = authPivotPos
 	pivot.rotation = authPivotRot
 	self.position = authPos

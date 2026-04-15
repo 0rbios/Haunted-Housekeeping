@@ -129,6 +129,7 @@ func pickup():
 	carryingNode = hoverOver
 	for player in legend.find_active_room().players:
 		change_auth.rpc_id(player, carryingNode.get_path(), myID)
+		carryingNode.synchronise.rpc_id(player, self.position, carryingNode.pivot.rotation, Vector3(0, 0, 0), carryingNode.rotation)
 	carryingNode.freeze = true
 	carryingNode.carriedBy = self
 
@@ -136,7 +137,7 @@ func drop():
 	carryingNode.position = Vector3(0, 0, 0)
 	carryingNode.pivot.position = self.position
 	carryingNode.carriedBy = null
-	carryingNode._synchronise.rpc_id(ownerID, self.position, carryingNode.pivot.rotation, Vector3(0, 0, 0), carryingNode.rotation)
+	carryingNode.synchronise.rpc_id(ownerID, self.position, carryingNode.pivot.rotation, Vector3(0, 0, 0), carryingNode.rotation)
 	for player in legend.find_active_room().players:
 		change_auth.rpc_id(player, carryingNode.get_path(), ownerID)
 	carryingNode = null

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bgkcqd3l6vipg"]
 
 [ext_resource type="Script" uid="uid://tcni6tbs5mg0" path="res://Maps/Loading Screen/Scripts/load_screen.gd" id="1_18rax"]
-[ext_resource type="Texture2D" uid="uid://ur6tg2mstnok" path="res://Assets/Ghost/Ghost.png" id="2_lrip3"]
+[ext_resource type="Texture2D" uid="uid://ur6tg2mstnok" path="res://Assets/Ghost.png" id="2_lrip3"]
 
 [sub_resource type="Animation" id="Animation_8oxws"]
 length = 0.001
