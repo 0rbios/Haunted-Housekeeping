@@ -75,14 +75,23 @@ offset_bottom = 432.0
 theme_override_font_sizes/font_size = 38
 text = "Exit"
 
-[node name="IP Entry" type="LineEdit" parent="CanvasLayer" unique_id=693540252]
-visible = false
-offset_left = 423.0
-offset_top = 449.0
-offset_right = 614.0
-offset_bottom = 480.0
-placeholder_text = "IP Address"
+[node name="Server IP" type="Label" parent="CanvasLayer" unique_id=1073648146]
+offset_left = 573.0
+offset_top = 627.0
+offset_right = 710.0
+offset_bottom = 650.0
+text = "This should be an IP"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Change Server Button" type="Button" parent="CanvasLayer" unique_id=455653365]
+offset_left = 578.0
+offset_top = 656.0
+offset_right = 698.0
+offset_bottom = 687.0
+text = "Change Server"
 
 [connection signal="pressed" from="CanvasLayer/Create Room Button" to="." method="_make_room_clicked"]
 [connection signal="pressed" from="CanvasLayer/Join Button" to="." method="_join_pressed"]
 [connection signal="pressed" from="CanvasLayer/Exit Button" to="." method="_exit_button"]
+[connection signal="pressed" from="CanvasLayer/Change Server Button" to="." method="_change_server_pressed"]

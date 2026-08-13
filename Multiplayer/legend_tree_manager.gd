@@ -43,22 +43,16 @@ func get_local_ip():
 
 # Creates A Server On The Dedicated Server Version And A Client On Anything Else
 func _ready():
-	multiplayer.peer_disconnected.connect(player_disconnecting)
-	
 	if OS.has_feature("dedicated_server"):
 		create_server()
 	else:
-		create_client()
+		multiplayer.peer_disconnected.connect(player_disconnecting)
 		clean_tree()
 
 func create_server():
 	print("Server started at IP: " + get_local_ip())
 	peer.create_server(PORT)
 	multiplayer.allow_object_decoding = true
-	multiplayer.multiplayer_peer = peer
-
-func create_client():
-	peer.create_client("127.0.0.1", PORT)
 	multiplayer.multiplayer_peer = peer
 
 func player_disconnecting(id: int):

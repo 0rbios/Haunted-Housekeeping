@@ -3,9 +3,10 @@ extends Control
 # Variables --------------------
 
 # Node Collection
-@onready var legend = get_tree().root.get_child(0)
+@onready var legend = get_tree().root.find_child("Legend Tree", true, false)
 @onready var nameEntry = $"CanvasLayer/Room Name"
 @onready var codeEntry = $"CanvasLayer/Room Code"
+@onready var ipText = $"CanvasLayer/Server IP"
 
 # Next Scenes
 var roomMenu = preload("res://Maps/Room/Room.tscn")
@@ -52,3 +53,7 @@ func _checkForExisting():
 	for room in legend.rooms:
 		if room.name == nameEntry.text.remove_chars(" "):
 			return true
+
+func _change_server_pressed():
+	multiplayer.multiplayer_peer.close()
+	get_tree().change_scene_to_file("res://Maps/Server Select/server_select.tscn")

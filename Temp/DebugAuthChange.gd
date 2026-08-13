@@ -1,6 +1,6 @@
 extends Node3D
 
-@onready var legend = get_tree().root.get_child(0)
+@onready var legend = get_tree().root.find_child("Legend Tree", true, false)
 @onready var spawner = $"Player Spawner"
 var entityDataRaw = FileAccess.get_file_as_string("res://Entity Loadstates/DEBUG.json")
 var entityData = JSON.parse_string(entityDataRaw)

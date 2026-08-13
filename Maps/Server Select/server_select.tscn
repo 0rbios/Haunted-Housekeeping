@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://by2pryfx166gc"]
+
+[ext_resource type="Script" uid="uid://cd5l62fa57mdf" path="res://Maps/Server Select/Scripts/server_select.gd" id="1_rfced"]
+
+[node name="Server Select" type="Control" unique_id=1691036432]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rfced")
+
+[node name="IP Entry" type="LineEdit" parent="." unique_id=1664813248]
+layout_mode = 0
+offset_left = 476.0
+offset_top = 362.0
+offset_right = 667.0
+offset_bottom = 393.0
+placeholder_text = "IP Address"
+
+[node name="Connect Button" type="Button" parent="." unique_id=153841932]
+layout_mode = 0
+offset_left = 674.0
+offset_top = 361.0
+offset_right = 746.0
+offset_bottom = 392.0
+text = "Connect"
+
+[connection signal="pressed" from="Connect Button" to="." method="_connect_pressed"]

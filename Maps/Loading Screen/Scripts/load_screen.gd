@@ -1,6 +1,6 @@
 extends Control
 
-@onready var legend = get_tree().root.get_child(0)
+@onready var legend = get_tree().root.find_child("Legend Tree", true, false)
 var loadScene : PackedScene
 
 func _ready():
