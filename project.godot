@@ -11,8 +11,8 @@ config_version=5
 [application]
 
 config/name="Haunted Housekeeping"
-config/version="0.1.0"
-run/main_scene="uid://by2pryfx166gc"
+config/version="0.0.1.0"
+run/main_scene="uid://dotfge5by02dn"
 config/features=PackedStringArray("4.8", "Forward Plus")
 config/icon="uid://ectaao4ns2be"
 
@@ -27,303 +27,41 @@ window/stretch/mode="viewport"
 
 project/assembly_name="Haunted Housekeeping"
 
-[global_group]
+[file_customization]
 
-player=""
-object=""
-ghost=""
-dirt=""
-
-[input]
-
-Up={
-"deadzone": 0.2,
-"events": [Object(InputEventJoypadMotion,
-"resource_local_to_scene": false,
-"resource_name": "",
-"device": -1,
-"axis": 1,
-"axis_value": -1.0,
-"script": null
-), Object(InputEventKey,
-"resource_local_to_scene": false,
-"resource_name": "",
-"device": -1,
-"window_id": 0,
-"alt_pressed": false,
-"shift_pressed": false,
-"ctrl_pressed": false,
-"meta_pressed": false,
-"pressed": false,
-"keycode": 0,
-"physical_keycode": 87,
-"key_label": 0,
-"unicode": 119,
-"location": 0,
-"echo": false,
-"script": null
-), Object(InputEventKey,
-"resource_local_to_scene": false,
-"resource_name": "",
-"device": -1,
-"window_id": 0,
-"alt_pressed": false,
-"shift_pressed": false,
-"ctrl_pressed": false,
-"meta_pressed": false,
-"pressed": false,
-"keycode": 0,
-"physical_keycode": 4194320,
-"key_label": 0,
-"unicode": 0,
-"location": 0,
-"echo": false,
-"script": null
-)]
-}
-Down={
-"deadzone": 0.2,
-"events": [Object(InputEventJoypadMotion,
-"resource_local_to_scene": false,
-"resource_name": "",
-"device": -1,
-"axis": 1,
-"axis_value": 1.0,
-"script": null
-), Object(InputEventKey,
-"resource_local_to_scene": false,
-"resource_name": "",
-"device": -1,
-"window_id": 0,
-"alt_pressed": false,
-"shift_pressed": false,
-"ctrl_pressed": false,
-"meta_pressed": false,
-"pressed": false,
-"keycode": 0,
-"physical_keycode": 83,
-"key_label": 0,
-"unicode": 115,
-"location": 0,
-"echo": false,
-"script": null
-), Object(InputEventKey,
-"resource_local_to_scene": false,
-"resource_name": "",
-"device": -1,
-"window_id": 0,
-"alt_pressed": false,
-"shift_pressed": false,
-"ctrl_pressed": false,
-"meta_pressed": false,
-"pressed": false,
-"keycode": 0,
-"physical_keycode": 4194322,
-"key_label": 0,
-"unicode": 0,
-"location": 0,
-"echo": false,
-"script": null
-)]
-}
-Left={
-"deadzone": 0.2,
-"events": [Object(InputEventJoypadMotion,
-"resource_local_to_scene": false,
-"resource_name": "",
-"device": -1,
-"axis": 0,
-"axis_value": -1.0,
-"script": null
-), Object(InputEventKey,
-"resource_local_to_scene": false,
-"resource_name": "",
-"device": -1,
-"window_id": 0,
-"alt_pressed": false,
-"shift_pressed": false,
-"ctrl_pressed": false,
-"meta_pressed": false,
-"pressed": false,
-"keycode": 0,
-"physical_keycode": 65,
-"key_label": 0,
-"unicode": 97,
-"location": 0,
-"echo": false,
-"script": null
-), Object(InputEventKey,
-"resource_local_to_scene": false,
-"resource_name": "",
-"device": -1,
-"window_id": 0,
-"alt_pressed": false,
-"shift_pressed": false,
-"ctrl_pressed": false,
-"meta_pressed": false,
-"pressed": false,
-"keycode": 0,
-"physical_keycode": 4194319,
-"key_label": 0,
-"unicode": 0,
-"location": 0,
-"echo": false,
-"script": null
-)]
-}
-Right={
-"deadzone": 0.2,
-"events": [Object(InputEventJoypadMotion,
-"resource_local_to_scene": false,
-"resource_name": "",
-"device": -1,
-"axis": 0,
-"axis_value": 1.0,
-"script": null
-), Object(InputEventKey,
-"resource_local_to_scene": false,
-"resource_name": "",
-"device": -1,
-"window_id": 0,
-"alt_pressed": false,
-"shift_pressed": false,
-"ctrl_pressed": false,
-"meta_pressed": false,
-"pressed": false,
-"keycode": 0,
-"physical_keycode": 68,
-"key_label": 0,
-"unicode": 100,
-"location": 0,
-"echo": false,
-"script": null
-), Object(InputEventKey,
-"resource_local_to_scene": false,
-"resource_name": "",
-"device": -1,
-"window_id": 0,
-"alt_pressed": false,
-"shift_pressed": false,
-"ctrl_pressed": false,
-"meta_pressed": false,
-"pressed": false,
-"keycode": 0,
-"physical_keycode": 4194321,
-"key_label": 0,
-"unicode": 0,
-"location": 0,
-"echo": false,
-"script": null
-)]
-}
-Dash={
-"deadzone": 0.2,
-"events": [Object(InputEventKey,
-"resource_local_to_scene": false,
-"resource_name": "",
-"device": -1,
-"window_id": 0,
-"alt_pressed": false,
-"shift_pressed": false,
-"ctrl_pressed": false,
-"meta_pressed": false,
-"pressed": false,
-"keycode": 0,
-"physical_keycode": 32,
-"key_label": 0,
-"unicode": 32,
-"location": 0,
-"echo": false,
-"script": null
-), Object(InputEventJoypadButton,
-"resource_local_to_scene": false,
-"resource_name": "",
-"device": -1,
-"button_index": 0,
-"pressure": 0.0,
-"pressed": true,
-"script": null
-)]
-}
-Interact={
-"deadzone": 0.2,
-"events": [Object(InputEventJoypadButton,
-"resource_local_to_scene": false,
-"resource_name": "",
-"device": -1,
-"button_index": 1,
-"pressure": 0.0,
-"pressed": true,
-"script": null
-), Object(InputEventKey,
-"resource_local_to_scene": false,
-"resource_name": "",
-"device": -1,
-"window_id": 0,
-"alt_pressed": false,
-"shift_pressed": false,
-"ctrl_pressed": false,
-"meta_pressed": false,
-"pressed": false,
-"keycode": 0,
-"physical_keycode": 69,
-"key_label": 0,
-"unicode": 101,
-"location": 0,
-"echo": false,
-"script": null
-)]
-}
-Use={
-"deadzone": 0.2,
-"events": [Object(InputEventMouseButton,
-"resource_local_to_scene": false,
-"resource_name": "",
-"device": -1,
-"window_id": 0,
-"alt_pressed": false,
-"shift_pressed": false,
-"ctrl_pressed": false,
-"meta_pressed": false,
-"button_mask": 1,
-"position": Vector2(126, 20),
-"global_position": Vector2(138, 80),
-"factor": 1.0,
-"button_index": 1,
-"canceled": false,
-"pressed": true,
-"double_click": false,
-"script": null
-), Object(InputEventJoypadButton,
-"resource_local_to_scene": false,
-"resource_name": "",
-"device": -1,
-"button_index": 2,
-"pressure": 0.0,
-"pressed": true,
-"script": null
-)]
-}
-SwitchCam={
-"deadzone": 0.2,
-"events": [Object(InputEventKey,
-"resource_local_to_scene": false,
-"resource_name": "",
-"device": -1,
-"window_id": 0,
-"alt_pressed": false,
-"shift_pressed": false,
-"ctrl_pressed": false,
-"meta_pressed": false,
-"pressed": false,
-"keycode": 0,
-"physical_keycode": 47,
-"key_label": 0,
-"unicode": 47,
-"location": 0,
-"echo": false,
-"script": null
-)]
+folder_colors={
+"res://Docs/": "gray",
+"res://Game/Assets/": "green",
+"res://Game/Maps/": "pink",
+"res://Game/Menus/": "red",
+"res://Game/Menus/Game Select/Assets/": "green",
+"res://Game/Menus/Game Select/Scripts/": "yellow",
+"res://Game/Menus/HUD/Assets/": "green",
+"res://Game/Menus/HUD/Scripts/": "yellow",
+"res://Game/Menus/Lobby/Assets/": "green",
+"res://Game/Menus/Lobby/Scripts/": "yellow",
+"res://Game/Menus/Login/Assets/": "green",
+"res://Game/Menus/Login/Scripts/": "yellow",
+"res://Game/Menus/Pause Menu/Assets/": "green",
+"res://Game/Menus/Pause Menu/Scripts/": "yellow",
+"res://Game/Menus/Server Select/Assets/": "green",
+"res://Game/Menus/Server Select/Scripts/": "yellow",
+"res://Game/Modules/": "blue",
+"res://Game/Modules/Dirt/Assets/": "green",
+"res://Game/Modules/Dirt/Scripts/": "yellow",
+"res://Game/Modules/Ghost/Assets/": "green",
+"res://Game/Modules/Ghost/Scripts/": "yellow",
+"res://Game/Modules/Map/Assets/": "green",
+"res://Game/Modules/Map/Scripts/": "yellow",
+"res://Game/Modules/Object/Assets/": "green",
+"res://Game/Modules/Object/Scripts/": "yellow",
+"res://Game/Modules/Player/Assets/": "green",
+"res://Game/Modules/Player/Scripts/": "yellow",
+"res://Game/SYS/": "purple",
+"res://Game/SYS/DATA/Scripts/": "yellow",
+"res://Game/SYS/GAME/Scripts/": "yellow",
+"res://Game/SYS/NETWORK/Scripts/": "yellow",
+"res://Game/SYS/SCENE/Scripts/": "yellow"
 }
 
 [physics]

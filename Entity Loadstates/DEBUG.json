@@ -1,5 +1,0 @@
-[
-	{"type": "ghost", "position": [12, 0.6, 16]},
-	{"type": "pickup", "position": [-12, 0.6, 9], "pickup": "mop"},
-	{"type": "dirt", "position": [-20, 0, -9], "cleanedBy": ["mop"]}
-]
