@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://dotfge5by02dn"]
+
+[ext_resource type="Script" uid="uid://75walh3gq6em" path="res://Game/SYS/GAME/Scripts/MANAGER_LOADER.gd" id="1_4u8pw"]
+[ext_resource type="PackedScene" uid="uid://jjuiwupvmkve" path="res://Game/SYS/SCENE/SCENE_MANAGER.tscn" id="2_vqwbx"]
+[ext_resource type="PackedScene" uid="uid://28runt2g5bkn" path="res://Game/SYS/NETWORK/NETWORK_MANAGER.tscn" id="3_ioil5"]
+[ext_resource type="PackedScene" uid="uid://1j1vpiqtfhx5" path="res://Game/SYS/DATA/DATA_MANAGER.tscn" id="4_1080v"]
+
+[node name="Game Manager" type="Node" unique_id=1334529015]
+script = ExtResource("1_4u8pw")
+_modList = Array[PackedScene]([ExtResource("2_vqwbx"), ExtResource("3_ioil5"), ExtResource("4_1080v")])

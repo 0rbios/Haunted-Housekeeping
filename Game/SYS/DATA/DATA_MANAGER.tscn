@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://1j1vpiqtfhx5"]
+
+[ext_resource type="Script" uid="uid://dtsk0ky7btrwj" path="res://Game/SYS/DATA/Scripts/GLOBAL_VARIABLES.gd" id="1_vv3kq"]
+
+[node name="Data Manager" type="Node" unique_id=1032374366]
+script = ExtResource("1_vv3kq")

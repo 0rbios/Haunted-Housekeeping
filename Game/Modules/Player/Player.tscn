@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://1x8j2vwuufo4"]
+
+[ext_resource type="Script" uid="uid://df3cxn6kj831v" path="res://Game/Modules/Player/Scripts/Player Movement.gd" id="1_ye0f3"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_s8ivk"]
+height = 1.5
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_782gp"]
+height = 1.5
+
+[node name="Player" type="CharacterBody3D" unique_id=1690121897]
+script = ExtResource("1_ye0f3")
+
+[node name="Model" type="MeshInstance3D" parent="." unique_id=574022643]
+mesh = SubResource("CylinderMesh_s8ivk")
+
+[node name="Hitbox" type="CollisionShape3D" parent="." unique_id=763623484]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0004272461, 0)
+shape = SubResource("CylinderShape3D_782gp")

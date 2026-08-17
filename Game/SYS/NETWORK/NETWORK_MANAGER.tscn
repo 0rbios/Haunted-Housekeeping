@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://28runt2g5bkn"]
+
+[ext_resource type="Script" uid="uid://blvi0gu5e3nwb" path="res://Game/SYS/NETWORK/Scripts/NETWORK_CALLS.gd" id="1_ti21n"]
+
+[node name="Network Manager" type="Node" unique_id=903024195]
+script = ExtResource("1_ti21n")
