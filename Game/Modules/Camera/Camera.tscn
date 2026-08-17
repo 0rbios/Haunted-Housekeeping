@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://delbcj73omgrh"]
+
+[ext_resource type="Script" uid="uid://cd4wyll6pwq8b" path="res://Game/Modules/Camera/Scripts/Camera Movement.gd" id="1_sbl78"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1rvpa"]
+
+[sub_resource type="Sky" id="Sky_g652f"]
+sky_material = SubResource("ProceduralSkyMaterial_1rvpa")
+
+[sub_resource type="Environment" id="Environment_sbl78"]
+background_mode = 2
+background_energy_multiplier = 2.0
+sky = SubResource("Sky_g652f")
+ambient_light_source = 3
+ambient_light_color = Color(1, 1, 0.6313726, 1)
+
+[node name="Camera" type="Camera3D" unique_id=1604347038]
+environment = SubResource("Environment_sbl78")
+script = ExtResource("1_sbl78")

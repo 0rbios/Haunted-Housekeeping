@@ -14,3 +14,9 @@ func _ready() -> void:
 	var player = load("res://Game/Modules/Player/Player.tscn").instantiate()
 	player.position = Vector3(0.0, 0.1, 0.0)
 	self.call_deferred("add_child", player)
+	
+	var camera = load("res://Game/Modules/Camera/Camera.tscn").instantiate()
+	camera.NodeToTrack = player
+	self.call_deferred("add_child", camera)
+	
+	camera.make_current()

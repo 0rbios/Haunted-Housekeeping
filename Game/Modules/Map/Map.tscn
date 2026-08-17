@@ -10,18 +10,6 @@ material = SubResource("StandardMaterial3D_s8ivk")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_pjwwc"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1rvpa"]
-
-[sub_resource type="Sky" id="Sky_g652f"]
-sky_material = SubResource("ProceduralSkyMaterial_1rvpa")
-
-[sub_resource type="Environment" id="Environment_pjwwc"]
-background_mode = 2
-background_energy_multiplier = 2.0
-sky = SubResource("Sky_g652f")
-ambient_light_source = 3
-ambient_light_color = Color(1, 1, 0.6313726, 1)
-
 [node name="Map" type="Node3D" unique_id=1247921566]
 script = ExtResource("1_pjwwc")
 
@@ -33,7 +21,3 @@ mesh = SubResource("BoxMesh_0ipjx")
 
 [node name="Hitbox" type="CollisionShape3D" parent="Base/Physics Body" unique_id=1336580447]
 shape = SubResource("BoxShape3D_pjwwc")
-
-[node name="TEMP_CAM" type="Camera3D" parent="." unique_id=1218662001]
-transform = Transform3D(0.6608382, -0.55972576, 0.49999997, 0.061628412, 0.70441604, 0.70710677, -0.7479939, -0.43646893, 0.49999997, 5, 5, 5)
-environment = SubResource("Environment_pjwwc")

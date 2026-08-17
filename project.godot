@@ -47,6 +47,7 @@ folder_colors={
 "res://Game/Menus/Server Select/Assets/": "green",
 "res://Game/Menus/Server Select/Scripts/": "yellow",
 "res://Game/Modules/": "blue",
+"res://Game/Modules/Camera/Scripts/": "yellow",
 "res://Game/Modules/Dirt/Assets/": "green",
 "res://Game/Modules/Dirt/Scripts/": "yellow",
 "res://Game/Modules/Ghost/Assets/": "green",
