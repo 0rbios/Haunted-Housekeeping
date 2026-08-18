@@ -8,7 +8,15 @@ height = 1.5
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_782gp"]
 height = 1.5
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_ivflr"]
+margin = 0.0
+size = Vector3(1, 0.155, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ye0f3"]
+size = Vector3(0.4486084, 0.111450195, 0.18115234)
+
 [node name="Player" type="CharacterBody3D" unique_id=1690121897]
+floor_constant_speed = true
 script = ExtResource("1_ye0f3")
 
 [node name="Model" type="MeshInstance3D" parent="." unique_id=574022643]
@@ -17,3 +25,14 @@ mesh = SubResource("CylinderMesh_s8ivk")
 [node name="Hitbox" type="CollisionShape3D" parent="." unique_id=763623484]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0004272461, 0)
 shape = SubResource("CylinderShape3D_782gp")
+
+[node name="Ground Check" type="ShapeCast3D" parent="." unique_id=1372316955]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.31223214, 0)
+shape = SubResource("BoxShape3D_ivflr")
+max_results = 1
+collision_mask = 255
+collide_with_areas = true
+
+[node name="Direction" type="MeshInstance3D" parent="." unique_id=117703366]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.026439339, 0.4442749, -0.5580138)
+mesh = SubResource("BoxMesh_ye0f3")

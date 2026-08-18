@@ -2,7 +2,11 @@ extends CharacterBody3D
 
 # Handle the player's movement around the scene
 
-var speed = 10
+@onready var groundCheck : Node = $"Ground Check"
+
+var canMove : bool = true
+
+var speed = 4
 
 var xVel = 0
 var xKeys = []
@@ -10,11 +14,11 @@ var xKeys = []
 var zVel = 0
 var zKeys = []
 
-var gravity = -0.1
-
-var vel = Vector3(0, 0, 0)
+var gravity = -3
 
 func _physics_process(_delta: float) -> void:
+	canMove = groundCheck.is_colliding()
+	
 	if Input.is_action_just_pressed("ui_left"): xKeys.append(-1)
 	if Input.is_action_just_pressed("ui_right"): xKeys.append(1)
 	if Input.is_action_just_pressed("ui_up"): zKeys.append(-1)
@@ -33,7 +37,9 @@ func _physics_process(_delta: float) -> void:
 	for key in zKeys.size():
 		zVel += zKeys[key] * (key + 1)
 	
-	var velNorm = Vector2(xVel, zVel).normalized()
-	vel = Vector3((velNorm.x * speed), gravity, (velNorm.y * speed))
+	var velNorm = Vector2(xVel * int(canMove), zVel * int(canMove)).normalized()
+	velocity = Vector3((velNorm.x * speed), gravity * int(!canMove), (velNorm.y * speed))
 	
-	move_and_collide(vel)
+	if (xKeys + zKeys).size() > 0:
+		rotation.y = atan2(velocity.x * -1, velocity.z * -1)
+	move_and_slide()
