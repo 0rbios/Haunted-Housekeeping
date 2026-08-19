@@ -20,7 +20,7 @@ size = Vector3(5.031006, 0.07237244, 4.2646484)
 script = ExtResource("1_pjwwc")
 
 [node name="Base" type="MeshInstance3D" parent="." unique_id=1244026279]
-transform = Transform3D(10, 0, 0, 0, 0.3, 0, 0, 0, 10, 0, 0, 0)
+transform = Transform3D(10, 0, 0, 0, 0.3, 0, 0, 0, 10, 3.94244, 0, -2.3926482)
 mesh = SubResource("BoxMesh_0ipjx")
 
 [node name="Physics Body" type="StaticBody3D" parent="Base" unique_id=1675309543]
@@ -29,7 +29,7 @@ mesh = SubResource("BoxMesh_0ipjx")
 shape = SubResource("BoxShape3D_pjwwc")
 
 [node name="Ramp" type="MeshInstance3D" parent="." unique_id=1510574730]
-transform = Transform3D(-4.371139e-08, 0.17364813, 0.9848075, 0, 0.9848075, -0.17364813, -1, -7.590401e-09, -4.30473e-08, -2.4256299, 0.47570762, -0.7473549)
+transform = Transform3D(-4.371139e-08, 0.17364813, 0.9848075, 0, 0.9848075, -0.17364813, -1, -7.590401e-09, -4.30473e-08, 1.5168102, 0.47570762, -3.1400032)
 mesh = SubResource("BoxMesh_pjwwc")
 
 [node name="Physics Body" type="StaticBody3D" parent="Ramp" unique_id=1899414223]
