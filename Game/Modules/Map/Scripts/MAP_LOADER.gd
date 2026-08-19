@@ -17,18 +17,25 @@ func readMap(mapFile : String) -> Array:
 	return mapData
 
 # Takes the raw data, cleans it up and defaults out any missing or broken data.
-func loadMap(data : Array) -> void:
+func loadMap(data : Array) -> Dictionary:
 	var cleanData = []
+	var mapConfig = {}
 	
 	for datapoint in data:
 		# Give up on any item that doesn't have a type in the valid item list
 		if "type" not in datapoint.keys(): continue
+		
+		if datapoint["type"] == "map":
+			mapConfig = datapoint
+		
 		var foundItem = _findType(datapoint["type"])
 		if foundItem == null: continue
 		
-		# Check for an then run the items cleanup script
+		# Check for and then run the items cleanup script
 		if "clean" in foundItem:
 			cleanData.append(foundItem.clean())
+	
+	return mapConfig
 
 func _findType(iType : String) -> PackedScene:
 	for item in items:

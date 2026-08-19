@@ -3,10 +3,18 @@ extends Node
 # Assembles the map. Including ghosts, dirt and players.
 
 var _mLoad = preload("res://Game/Modules/Map/Scripts/MAP_LOADER.gd").new()
+var _validHexAlpha = ['a', 'b', 'c', 'd', 'e', 'f']
 
 # Takes in the map data and applies it to the scene.
 func buildScene() -> void:
-	_mLoad.loadMap(_mLoad.readMap("res://Game/Maps/DEBUG.json"))
+	var mapConfig = _mLoad.loadMap(_mLoad.readMap("res://Game/Maps/DEBUG.json"))
+	var mapColour = ''
+	
+	if "colour" in mapConfig.keys():
+		mapColour = mapConfig["colour"].strip_edges()
+	
+	var colourLayer = $Base.get_active_material(0)
+	colourLayer.albedo_color = _cleanColour(mapColour)
 
 func _ready() -> void:
 	var base = $Base
@@ -26,3 +34,23 @@ func _ready() -> void:
 	self.call_deferred("add_child", camera)
 	
 	camera.make_current()
+
+func _cleanColour(inHex : String) -> String:
+	var colour = '#'
+	
+	if inHex.length() - 1 < 6:
+		for h in range(6 - (inHex.length() - 1)):
+			inHex += 'F'
+	
+	for h in inHex:
+		if h == '#': continue
+		
+		if h.is_valid_int() or h in _validHexAlpha:
+			colour += h
+			continue
+			
+		colour += 'F'
+	
+	colour = colour.left(7)
+	
+	return colour

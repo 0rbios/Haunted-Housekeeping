@@ -22,10 +22,10 @@ See Also:
 - Make ghosts pick up objects
 - Makes ghosts drop objects
 - Make ghosts steal objects
-- Allow player movement speed to equal 0 when held, while still rotating
+- ~~Allow player movement speed to equal 0~~ when held, while still rotating
 - Allow ghosts to grab players
 - Spawn dirt on map
 - Store dirt state
 - Load different dirt types
 - Load different object types
-- Change scene details from data file
+- ~~Change scene details from data file~~ (Currently only works for ground colour)

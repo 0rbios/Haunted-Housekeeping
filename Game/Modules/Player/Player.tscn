@@ -17,6 +17,7 @@ size = Vector3(0.4486084, 0.111450195, 0.18115234)
 
 [node name="Player" type="CharacterBody3D" unique_id=1690121897]
 floor_constant_speed = true
+floor_max_angle = 0.5235988
 script = ExtResource("1_ye0f3")
 
 [node name="Model" type="MeshInstance3D" parent="." unique_id=574022643]
