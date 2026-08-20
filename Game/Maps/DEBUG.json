@@ -1,8 +1,12 @@
 [
 	{
 		"type": "map",
-		"colour": "#11FF11", 
+		"colour": "#0c6800", 
 		"weather": 5,
 		"time": 12
+	},
+	{
+		"type": "object",
+		"position": [3, 0.2, 3]
 	}
 ]

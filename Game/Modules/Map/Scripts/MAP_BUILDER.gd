@@ -19,6 +19,7 @@ func buildScene() -> void:
 func _ready() -> void:
 	var base = $Base
 	
+	_mLoad.map = self
 	buildScene()
 	
 	var player = load("res://Game/Modules/Player/Player.tscn").instantiate()

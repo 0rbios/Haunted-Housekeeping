@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://cgwd5qcc0e56l"]
+
+[ext_resource type="Script" uid="uid://dt4pvcp00ojni" path="res://Game/Modules/Object/Scripts/Object Handler.gd" id="1_4ooyw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s8ivk"]
+albedo_color = Color(0.3033563, 0.89209783, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_fx0ba"]
+material = SubResource("StandardMaterial3D_s8ivk")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4ooyw"]
+
+[node name="Object" type="RigidBody3D" unique_id=735106963]
+script = ExtResource("1_4ooyw")
+
+[node name="Model" type="MeshInstance3D" parent="." unique_id=811111437]
+mesh = SubResource("BoxMesh_fx0ba")
+
+[node name="Hitbox" type="CollisionShape3D" parent="." unique_id=1208465732]
+shape = SubResource("BoxShape3D_4ooyw")

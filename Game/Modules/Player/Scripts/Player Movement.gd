@@ -4,6 +4,8 @@ extends CharacterBody3D
 
 @onready var _groundCheck : Node = $"Ground Check"
 
+#var _inventory = load("res://Game/Modules/Player/Scripts/Inventory.gd").new()
+
 var _canMove : bool = true
 
 var _speed = 4

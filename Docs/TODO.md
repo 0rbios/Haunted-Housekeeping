@@ -9,9 +9,9 @@ See Also:
 
 > Todo - Current Version : 0.1
 
-- Store player inventory
+- ~~Store player inventory~~
 - Player held item
-- Spawn objects into world
+- ~~Spawn objects into world~~
 - Make player pick up objects
 - Make player drop objects
 - Switch between objects in inventory

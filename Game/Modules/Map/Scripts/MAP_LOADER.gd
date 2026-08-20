@@ -2,8 +2,10 @@ extends Node
 
 # Reads a given map file and handles any relevant actions from it.
 
+var map : Node
+
 # User defined list of valid scene items.
-@export var items : Array[PackedScene] = []
+var items : Array[PackedScene] = [load("res://Game/Modules/Object/Object.tscn")]
 
 # Takes in the map file and outputs the raw data.
 func readMap(mapFile : String) -> Array:
@@ -18,8 +20,9 @@ func readMap(mapFile : String) -> Array:
 
 # Takes the raw data, cleans it up and defaults out any missing or broken data.
 func loadMap(data : Array) -> Dictionary:
-	var cleanData = []
 	var mapConfig = {}
+	
+	if map == null: return mapConfig
 	
 	for datapoint in data:
 		# Give up on any item that doesn't have a type in the valid item list
@@ -32,14 +35,20 @@ func loadMap(data : Array) -> Dictionary:
 		if foundItem == null: continue
 		
 		# Check for and then run the items cleanup script
-		if "clean" in foundItem:
-			cleanData.append(foundItem.clean())
-	
+		var itemInstance = foundItem.instantiate()
+		if itemInstance.has_method("clean"):
+			map.call_deferred("add_child", itemInstance)
+			itemInstance.clean(datapoint)
+		else:
+			itemInstance.queue_free()
+		
 	return mapConfig
 
 func _findType(iType : String) -> PackedScene:
 	for item in items:
-		if "type" in item:
-			if item.type == iType:
+		var testInstance = item.instantiate()
+		if "type" in testInstance:
+			if testInstance.type == iType: 
 				return item
+		testInstance.queue_free()
 	return null
